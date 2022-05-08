@@ -19,6 +19,7 @@ require("core.tabnine")
 require("core.bufferline")
 require("core.terminal")
 require("core.indentline")
+require("core.gitconflict")
 
 -- LSP
 require("lsp")

@@ -44,7 +44,8 @@ return require("packer").startup(function(use)
 	})
 	-- Colorscheme
 	-- use("gruvbox-community/gruvbox")
-	use("sainnhe/gruvbox-material")
+	-- use("sainnhe/gruvbox-material")
+	use("shaunsingh/nord.nvim")
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("windwp/nvim-ts-autotag")
@@ -72,6 +73,13 @@ return require("packer").startup(function(use)
 		requires = {
 			"nvim-lua/plenary.nvim",
 		},
+	})
+	-- Git conflict
+	use({
+		"akinsho/git-conflict.nvim",
+		config = function()
+			require("git-conflict").setup()
+		end,
 	})
 	-- Lualine
 	use({

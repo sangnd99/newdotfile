@@ -62,10 +62,14 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+-- Custom lualine theme
+local custom_nord = require("lualine.themes.nord")
+custom_nord.normal.c.bg = "none"
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
+		theme = custom_nord,
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
