@@ -5,6 +5,7 @@ end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
+local diagnostic = null_ls.builtins.diagnostics
 
 null_ls.setup({
 	debug = false,
@@ -23,6 +24,7 @@ null_ls.setup({
 			extra_filetypes = { "toml", "solidity" },
 			-- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
 		}),
+		diagnostic.eslint,
 		formatting.stylua,
 		-- formatting.black.with { extra_args = { "--fast" } },
 		-- formatting.google_java_format,

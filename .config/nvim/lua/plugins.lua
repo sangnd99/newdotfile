@@ -46,6 +46,7 @@ return require("packer").startup(function(use)
 	-- use("gruvbox-community/gruvbox")
 	-- use("sainnhe/gruvbox-material")
 	use("shaunsingh/nord.nvim")
+	use("navarasu/onedark.nvim")
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("windwp/nvim-ts-autotag")
@@ -114,4 +115,15 @@ return require("packer").startup(function(use)
 	end
 	-- Indent line
 	use("lukas-reineke/indent-blankline.nvim")
+	-- Regex explain
+	use({
+		"bennypowers/nvim-regexplainer",
+		config = function()
+			require("regexplainer").setup()
+		end,
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+			"MunifTanjim/nui.nvim",
+		},
+	})
 end)

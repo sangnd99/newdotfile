@@ -63,13 +63,13 @@ local spaces = function()
 end
 
 -- Custom lualine theme
-local custom_nord = require("lualine.themes.nord")
-custom_nord.normal.c.bg = "none"
+local custom_theme = require("lualine.themes.onedark")
+custom_theme.normal.c.bg = "none"
 
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = custom_nord,
+		theme = custom_theme,
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
