@@ -55,3 +55,7 @@ vim.keymap.set("n", "<C-l>", "<CMD>NavigatorRight<CR>")
 vim.keymap.set("n", "<C-k>", "<CMD>NavigatorUp<CR>")
 vim.keymap.set("n", "<C-j>", "<CMD>NavigatorDown<CR>")
 vim.keymap.set("n", "<C-p>", "<CMD>NavigatorPrevious<CR>")
+
+-- Buffer line traveling
+vim.keymap.set("n", "]b", ":BufferLineCycleNext<CR>")
+vim.keymap.set("n", "[b", ":BufferLineCyclePrev<CR>")
