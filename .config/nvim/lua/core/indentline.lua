@@ -1,10 +1,18 @@
-local opt = vim.opt
+local status_ok, indent_blankline = pcall(require, "indent_blankline")
+if not status_ok then
+	return
+end
 
-opt.list = true
-opt.listchars:append("space:⋅")
-opt.listchars:append("eol:↴")
-require("indent_blankline").setup({
-	space_char_blankline = " ",
+indent_blankline.setup({
+	char = "▏",
+	show_trailing_blankline_indent = false,
+	show_first_indent_level = true,
+	use_treesitter = true,
 	show_current_context = true,
-	-- show_current_context_start = true,
+	buftype_exclude = { "terminal", "nofile" },
+	filetype_exclude = {
+		"help",
+		"packer",
+		"NvimTree",
+	},
 })

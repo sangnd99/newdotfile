@@ -1,19 +1,22 @@
-local g = vim.g
-local tree_cb = require("nvim-tree.config").nvim_tree_callback
+local status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not status_ok then
+	return
+end
 
-vim.o.termguicolors = true
+local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+if not config_status_ok then
+	return
+end
 
-g.nvim_tree_allow_resize = 1
+local tree_cb = nvim_tree_config.nvim_tree_callback
 
-require("nvim-tree").setup({
-	open_on_setup = false,
-	open_on_tab = false,
-	update_cwd = true,
+nvim_tree.setup({
 	update_focused_file = {
 		enable = true,
+		update_cwd = true,
 	},
 	renderer = {
-		highlight_git = true,
+		root_folder_modifier = ":t",
 		indent_markers = {
 			enable = true,
 			icons = {
@@ -22,16 +25,37 @@ require("nvim-tree").setup({
 				none = "  ",
 			},
 		},
-	},
-	actions = {
-		open_file = {
-			quit_on_open = true,
+		icons = {
+			glyphs = {
+				default = "",
+				symlink = "",
+				folder = {
+					arrow_open = "",
+					arrow_closed = "",
+					default = "",
+					open = "",
+					empty = "",
+					empty_open = "",
+					symlink = "",
+					symlink_open = "",
+				},
+				git = {
+					unstaged = "",
+					staged = "S",
+					unmerged = "",
+					renamed = "➜",
+					untracked = "U",
+					deleted = "",
+					ignored = "◌",
+				},
+			},
 		},
 	},
 	diagnostics = {
 		enable = true,
+		show_on_dirs = true,
 		icons = {
-			hint = "",
+			hint = "",
 			info = "",
 			warning = "",
 			error = "",
@@ -39,41 +63,14 @@ require("nvim-tree").setup({
 	},
 	view = {
 		width = 50,
+		height = 30,
 		side = "left",
 		mappings = {
-			custom_only = false,
 			list = {
 				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
 				{ key = "h", cb = tree_cb("close_node") },
 				{ key = "v", cb = tree_cb("vsplit") },
-				{ key = "s", cb = tree_cb("split") },
 			},
 		},
 	},
-	-- show_icons = {
-	-- 	git = 1,
-	-- 	folders = 1,
-	-- 	files = 1,
-	-- 	folder_arrows = 1,
-	-- },
-	-- icons = {
-	-- 	default = "",
-	-- 	symlink = "",
-	-- 	git = {
-	-- 		unstaged = "",
-	-- 		staged = "S",
-	-- 		unmerged = "",
-	-- 		renamed = "➜",
-	-- 		deleted = "",
-	-- 		untracked = "U",
-	-- 		ignored = "◌",
-	-- 	},
-	-- 	folder = {
-	-- 		default = "",
-	-- 		open = "",
-	-- 		empty = "",
-	-- 		empty_open = "",
-	-- 		symlink = "",
-	-- 	},
-	-- },
 })

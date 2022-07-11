@@ -22,12 +22,6 @@ map("n", "∆", ":resize +2<cr>", opts)
 map("n", "˙", ":vertical resize -2<cr>", opts)
 map("n", "¬", ":vertical resize +2<cr>", opts)
 
--- Window movement
--- map('n', '<C-j>', '<C-w>j', opts)
--- map('n', '<C-k>', '<C-w>k', opts)
--- map('n', '<C-h>', '<C-w>h', opts)
--- map('n', '<C-l>', '<C-w>l', opts)
-
 -- I NEED THIS
 map("n", ":Wq", ":wq", opts)
 map("n", ":Q", ":q", opts)
@@ -39,8 +33,6 @@ map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
 -- Explorer
--- map('n', '<Leader>e', ':NvimTreeToggle<cr>', opts)
--- map('n', '<Leader>E', ':NvimTreeFindFile<cr>', opts)
 map("n", "<Leader>e", ":NvimTreeFindFileToggle<cr>", opts)
 
 -- Telescope
@@ -50,12 +42,12 @@ map("n", ";", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts)
 
 -- Tmux navigation
-vim.keymap.set("n", "<C-h>", "<CMD>NavigatorLeft<CR>")
-vim.keymap.set("n", "<C-l>", "<CMD>NavigatorRight<CR>")
-vim.keymap.set("n", "<C-k>", "<CMD>NavigatorUp<CR>")
-vim.keymap.set("n", "<C-j>", "<CMD>NavigatorDown<CR>")
-vim.keymap.set("n", "<C-p>", "<CMD>NavigatorPrevious<CR>")
+map("n", "<C-h>", "<CMD>NavigatorLeft<CR>", opts)
+map("n", "<C-l>", "<CMD>NavigatorRight<CR>", opts)
+map("n", "<C-k>", "<CMD>NavigatorUp<CR>", opts)
+map("n", "<C-j>", "<CMD>NavigatorDown<CR>", opts)
+map("n", "<C-p>", "<CMD>NavigatorPrevious<CR>", opts)
 
 -- Buffer line traveling
-vim.keymap.set("n", "]b", ":BufferLineCycleNext<CR>")
-vim.keymap.set("n", "[b", ":BufferLineCyclePrev<CR>")
+map("n", "]b", ":BufferLineCycleNext<CR>", opts)
+map("n", "[b", ":BufferLineCyclePrev<CR>", opts)

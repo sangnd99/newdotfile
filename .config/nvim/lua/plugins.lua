@@ -40,9 +40,6 @@ return require("packer").startup(function(use)
 		requires = "kyazdani42/nvim-web-devicons",
 	})
 	-- Colorscheme
-	-- use("gruvbox-community/gruvbox")
-	-- use("sainnhe/gruvbox-material")
-	use("shaunsingh/nord.nvim")
 	use("navarasu/onedark.nvim")
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -105,22 +102,6 @@ return require("packer").startup(function(use)
 	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 	-- Tabline
 	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
-	-- Terminal
-	use({ "akinsho/toggleterm.nvim" })
-	if packer_bootstrap then
-		require("packer").sync()
-	end
 	-- Indent line
 	use("lukas-reineke/indent-blankline.nvim")
-	-- Regex explain
-	use({
-		"bennypowers/nvim-regexplainer",
-		config = function()
-			require("regexplainer").setup()
-		end,
-		requires = {
-			"nvim-treesitter/nvim-treesitter",
-			"MunifTanjim/nui.nvim",
-		},
-	})
 end)

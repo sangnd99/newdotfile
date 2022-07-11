@@ -26,6 +26,7 @@ null_ls.setup({
 		}),
 		diagnostic.eslint,
 		formatting.stylua,
+		diagnostic.cspell,
 		-- formatting.black.with { extra_args = { "--fast" } },
 		-- formatting.google_java_format,
 	},
