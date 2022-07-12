@@ -106,7 +106,6 @@ cmp.setup({
 		{ name = "vsnip" },
 		{ name = "buffer" },
 		{ name = "path" },
-		{ name = "cmp_tabnine" },
 		{ name = "treesitter" },
 	},
 	confirm_opts = {

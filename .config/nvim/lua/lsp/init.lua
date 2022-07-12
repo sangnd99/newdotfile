@@ -13,34 +13,6 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSig
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticsignInfo", numhl = "DiagnosticsignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint", numhl = "DiagnosticSignHint" })
 
--- symbols for autocomplete
--- vim.lsp.protocol.CompletionItemKind = {
---   Class = " ",
---   Color = " ",
---   Constant = "ﲀ ",
---   Constructor = " ",
---   Enum = "練",
---   EnumMember = " ",
---   Event = " ",
---   Field = " ",
---   File = "",
---   Folder = " ",
---   Function = " ",
---   Interface = "ﰮ ",
---   Keyword = " ",
---   Method = " ",
---   Module = " ",
---   Operator = "",
---   Property = " ",
---   Reference = " ",
---   Snippet = " ",
---   Struct = " ",
---   Text = " ",
---   TypeParameter = " ",
---   Unit = "塞",
---   Value = " ",
---   Variable = " ",
--- }
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	underline = true,
 	-- This sets the spacing and the prefix, obviously.
