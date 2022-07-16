@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["Navigator.nvim"] = {
     config = { "\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14Navigator\frequire\0" },
     loaded = true,
@@ -100,10 +105,15 @@ _G.packer_plugins = {
     path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-vsnip"] = {
+  ["cmp-path"] = {
     loaded = true,
-    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
+    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -145,14 +155,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-code-action-menu"] = {
-    commands = { "CodeActionMenu" },
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/opt/nvim-code-action-menu",
-    url = "https://github.com/weilbith/nvim-code-action-menu"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -213,16 +215,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/vim-matchup",
     url = "https://github.com/andymass/vim-matchup"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
-  },
-  ["vscode-es7-javascript-react-snippets"] = {
-    loaded = true,
-    path = "/Users/sangnguyen/.local/share/nvim/site/pack/packer/start/vscode-es7-javascript-react-snippets",
-    url = "https://github.com/dsznajder/vscode-es7-javascript-react-snippets"
   }
 }
 
@@ -235,12 +227,6 @@ time([[Config for Navigator.nvim]], false)
 time([[Config for git-conflict.nvim]], true)
 try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0", "config", "git-conflict.nvim")
 time([[Config for git-conflict.nvim]], false)
-
--- Command lazy-loads
-time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file CodeActionMenu lua require("packer.load")({'nvim-code-action-menu'}, { cmd = "CodeActionMenu", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-time([[Defining lazy-load commands]], false)
-
 if should_profile then save_profiles() end
 
 end)

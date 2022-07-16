@@ -3,6 +3,13 @@ if not cmp_status_ok then
 	return
 end
 
+local snip_status_ok, luasnip = pcall(require, "luasnip")
+if not snip_status_ok then
+	return
+end
+
+require("luasnip/loaders/from_vscode").lazy_load()
+
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -39,7 +46,7 @@ local kind_icons = {
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
+			luasnip.lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
 
@@ -92,7 +99,7 @@ cmp.setup({
 			vim_item.menu = ({
 				nvim_lsp = "",
 				nvim_lua = "",
-				vsnip = "",
+				luasnip = "",
 				buffer = "",
 				path = "",
 				emoji = "",
@@ -103,7 +110,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
-		{ name = "vsnip" },
+		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "treesitter" },

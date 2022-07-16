@@ -57,13 +57,13 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-path")
 	use("hrsh7th/nvim-cmp")
 	use("williamboman/nvim-lsp-installer")
 	use("b0o/SchemaStore.nvim")
 	-- Snippet
-	use("hrsh7th/cmp-vsnip")
-	use("hrsh7th/vim-vsnip")
-	use({ "dsznajder/vscode-es7-javascript-react-snippets", run = "yarn install --frozen-lockfile && yarn compile" })
+	use({ "saadparwaiz1/cmp_luasnip" })
+	use({ "L3MON4D3/LuaSnip" })
 	use("rafamadriz/friendly-snippets")
 	-- Autopairs
 	use("windwp/nvim-autopairs")
@@ -103,12 +103,11 @@ return packer.startup(function(use)
 			require("Navigator").setup()
 		end,
 	})
-	-- Code action ui
-	use({ "weilbith/nvim-code-action-menu", cmd = "CodeActionMenu" })
 	-- Tabline
 	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
 	-- Indent line
 	use("lukas-reineke/indent-blankline.nvim")
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
