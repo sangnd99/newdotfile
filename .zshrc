@@ -123,6 +123,4 @@ alias lsa='lsd -A'
 alias l='lsd -la'
 alias ll='lsd -l'
 
-
 eval "$(starship init zsh)"
-export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
