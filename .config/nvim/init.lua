@@ -17,6 +17,7 @@ require("core.cmp")
 require("core.bufferline")
 require("core.indentline")
 require("core.gitconflict")
+require("core.spectre")
 
 -- LSP
 require("lsp")

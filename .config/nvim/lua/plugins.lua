@@ -108,6 +108,8 @@ return packer.startup(function(use)
 	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
 	-- Indent line
 	use("lukas-reineke/indent-blankline.nvim")
+	-- Spectre
+	use("windwp/nvim-spectre")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
