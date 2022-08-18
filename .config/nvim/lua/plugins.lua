@@ -114,6 +114,8 @@ return packer.startup(function(use)
 	use("lukas-reineke/indent-blankline.nvim")
 	-- Spectre
 	use("windwp/nvim-spectre")
+	-- Git diff view
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

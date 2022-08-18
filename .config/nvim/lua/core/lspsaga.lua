@@ -2,7 +2,6 @@ local status_ok, saga = pcall(require, "lspsaga")
 if not status_ok then
 	return
 end
-
 local status_ok, action = pcall(require, "lspsaga.action")
 if not status_ok then
 	return
@@ -18,7 +17,6 @@ saga.init_lsp_saga({
 })
 
 -- Keymapping
-
 -- Lsp finder
 vim.keymap.set("n", "gd", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 

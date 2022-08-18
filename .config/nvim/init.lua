@@ -19,6 +19,7 @@ require("core.indentline")
 require("core.gitconflict")
 require("core.spectre")
 require("core.lspsaga")
+require("core.diffview")
 
 -- LSP
 require("lsp")
