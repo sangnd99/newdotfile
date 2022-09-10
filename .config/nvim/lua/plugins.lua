@@ -65,6 +65,17 @@ return packer.startup(function(use)
 	use({
 		"glepnir/lspsaga.nvim",
 		branch = "main",
+		config = function()
+			local saga = require("lspsaga")
+
+			saga.init_lsp_saga({
+				finder_action_keys = {
+					open = "o",
+					vsplit = "v",
+					split = "s",
+				},
+			})
+		end,
 	})
 	-- Snippet
 	use({ "saadparwaiz1/cmp_luasnip" })
