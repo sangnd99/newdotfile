@@ -102,11 +102,6 @@ return packer.startup(function(use)
 		"hoob3rt/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	-- Telescope
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
 	-- Colorizer
 	use("norcalli/nvim-colorizer.lua")
 	-- Comment
@@ -127,6 +122,12 @@ return packer.startup(function(use)
 	use("windwp/nvim-spectre")
 	-- Git diff view
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+	-- FZF
+	use({
+		"ibhagwan/fzf-lua",
+		-- optional for icon support
+		requires = { "kyazdani42/nvim-web-devicons" },
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
