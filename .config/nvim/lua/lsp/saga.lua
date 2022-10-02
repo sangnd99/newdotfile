@@ -4,6 +4,11 @@ if not status_cmp_ok then
 end
 
 lspsaga.init_lsp_saga({
+	finder_action_keys = {
+		open = "o",
+		vsplit = "v",
+		split = "s",
+	},
 	code_action_lightbulb = {
 		enable = false,
 	},

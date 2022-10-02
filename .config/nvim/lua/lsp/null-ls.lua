@@ -17,8 +17,7 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-					vim.lsp.buf.formatting_sync()
+					vim.lsp.buf.format({ bufnr = bufnr })
 				end,
 			})
 		end
@@ -30,6 +29,7 @@ null_ls.setup({
 		}),
 		diagnostic.eslint,
 		formatting.stylua,
+		formatting.gofmt,
 		diagnostic.cspell,
 		-- formatting.black.with { extra_args = { "--fast" } },
 		-- formatting.google_java_format,
