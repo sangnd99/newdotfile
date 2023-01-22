@@ -14,6 +14,8 @@ configs.setup({
 		"json",
 		"json5",
 		"css",
+		"go",
+    "markdown",
 	},
 	matchup = {
 		enable = true, -- mandatory, false will disable the whole extension

@@ -42,60 +42,36 @@ packer.init({
 return packer.startup(function(use)
 	use({ "wbthomason/packer.nvim" })
 	-- My plugins here
-	-- File explorer
-	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = "kyazdani42/nvim-web-devicons",
-	})
-	-- Colorscheme
-	use("navarasu/onedark.nvim")
-	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("windwp/nvim-ts-autotag")
-	use("andymass/vim-matchup")
 	-- LSP
-	use("jose-elias-alvarez/null-ls.nvim")
 	use("neovim/nvim-lspconfig")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/nvim-cmp")
 	use("williamboman/nvim-lsp-installer")
-	use("b0o/SchemaStore.nvim")
 	use({
 		"glepnir/lspsaga.nvim",
 		branch = "main",
 	})
-	-- Snippet
-	use({ "saadparwaiz1/cmp_luasnip" })
-	use({ "L3MON4D3/LuaSnip" })
-	use("rafamadriz/friendly-snippets")
+	use("jose-elias-alvarez/null-ls.nvim")
+	use("b0o/SchemaStore.nvim")
+	-- Treesitter
+	use("nvim-treesitter/nvim-treesitter")
+	use("windwp/nvim-ts-autotag")
+	use("andymass/vim-matchup")
 	-- Autopairs
 	use("windwp/nvim-autopairs")
-	-- Gitsigns
-	use({
-		"lewis6991/gitsigns.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-	})
-	-- Git conflict
-	use({
-		"akinsho/git-conflict.nvim",
-		config = function()
-			require("git-conflict").setup()
-		end,
-	})
-	-- Lualine
-	use({
-		"hoob3rt/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	})
-	-- Colorizer
-	use("norcalli/nvim-colorizer.lua")
-	-- Comment
-	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring")
+	-- Completion
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/nvim-cmp")
+	-- Snippets
+	use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" })
+	use("rafamadriz/friendly-snippets")
+	-- Telescope and file browser
+	use({ "nvim-telescope/telescope.nvim", tag = "0.1.1" })
+	use("nvim-lua/plenary.nvim")
+	use("nvim-telescope/telescope-file-browser.nvim")
+	-- Colorscheme
+	use("navarasu/onedark.nvim")
+	-- Icons
+	use("kyazdani42/nvim-web-devicons")
 	-- Tmux
 	use({
 		"numToStr/Navigator.nvim",
@@ -104,19 +80,25 @@ return packer.startup(function(use)
 		end,
 	})
 	-- Tabline
-	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
-	-- Indent line
-	use("lukas-reineke/indent-blankline.nvim")
+	use("akinsho/bufferline.nvim")
+	-- Comment
+	use("numToStr/Comment.nvim")
+	use("JoosepAlviste/nvim-ts-context-commentstring")
+	-- Lualine
+	use("hoob3rt/lualine.nvim")
+	-- Colorizer
+	use("norcalli/nvim-colorizer.lua")
+	-- Git conflict
+	use({
+		"akinsho/git-conflict.nvim",
+		config = function()
+			require("git-conflict").setup()
+		end,
+	})
+	-- Git diff view
+	use("sindrets/diffview.nvim")
 	-- Spectre
 	use("windwp/nvim-spectre")
-	-- Git diff view
-	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-	-- FZF
-	use({
-		"ibhagwan/fzf-lua",
-		-- optional for icon support
-		requires = { "kyazdani42/nvim-web-devicons" },
-	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

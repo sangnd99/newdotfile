@@ -32,18 +32,6 @@ map("n", ":Q!", ":q!", opts)
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
--- Explorer
-map("n", "<Leader>e", ":NvimTreeFindFileToggle<cr>", opts)
-
--- Telescope
---[[ map("n", "'f", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts) ]]
---[[ map("n", "'g", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts) ]]
---[[ map("n", ";", "<cmd>lua require('telescope.builtin').buffers()<cr>", opts) ]]
---[[ map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", opts) ]]
-map("n", "'f", "<cmd>FzfLua files<cr>", opts)
-map("n", "'g", "<cmd>FzfLua live_grep<cr>", opts)
-map("n", ";", "<cmd>FzfLua buffers<cr>", opts)
-
 -- Tmux navigation
 map("n", "<C-h>", "<CMD>NavigatorLeft<CR>", opts)
 map("n", "<C-l>", "<CMD>NavigatorRight<CR>", opts)

@@ -3,7 +3,7 @@ if not status_cmp_ok then
 	return
 end
 
-lspsaga.init_lsp_saga({
+lspsaga.setup({
 	finder_action_keys = {
 		open = "o",
 		vsplit = "v",
@@ -11,5 +11,13 @@ lspsaga.init_lsp_saga({
 	},
 	code_action_lightbulb = {
 		enable = false,
+	},
+	ui = {
+		winblend = 10,
+		border = "rounded",
+		colors = {
+			--float window normal background color
+			normal_bg = "#2a324a",
+		},
 	},
 })

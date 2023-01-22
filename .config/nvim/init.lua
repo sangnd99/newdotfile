@@ -1,7 +1,6 @@
--- Default config
 require("plugins")
 require("settings")
-require("keymappings")
+require("mappings")
 require("colorscheme")
 
 -- LSP
