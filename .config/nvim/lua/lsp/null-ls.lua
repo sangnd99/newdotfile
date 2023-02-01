@@ -7,38 +7,13 @@ end
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local lsp_formatting = function(bufnr)
-	vim.lsp.buf.format({
-		filter = function(client)
-			-- apply whatever logic you want (in this example, we'll only use null-ls)
-			return client.name == "null-ls"
-		end,
-		bufnr = bufnr,
-	})
-end
 
 null_ls.setup({
 	debug = false,
-	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					lsp_formatting(bufnr)
-				end,
-			})
-		end
-	end,
 	sources = {
 		formatting.prettier,
 		diagnostics.eslint,
 		formatting.stylua,
 		formatting.gofmt,
-		-- formatting.black.with { extra_args = { "--fast" } },
-		-- formatting.google_java_format,
 	},
 })

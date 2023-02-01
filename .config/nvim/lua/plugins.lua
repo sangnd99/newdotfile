@@ -45,10 +45,6 @@ return packer.startup(function(use)
 	-- LSP
 	use("neovim/nvim-lspconfig")
 	use("williamboman/nvim-lsp-installer")
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-	})
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("b0o/SchemaStore.nvim")
 	-- Treesitter
@@ -61,6 +57,7 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/nvim-cmp")
+  use("saadparwaiz1/cmp_luasnip")
 	-- Snippets
 	use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" })
 	use("rafamadriz/friendly-snippets")

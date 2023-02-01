@@ -52,44 +52,43 @@ M.setup = function()
 end
 
 local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.api.nvim_buf_set_keymap
-	keymap(bufnr, "n", "J", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.format { async = true } <cr>", opts)
-	keymap(bufnr, "n", "gd", "<cmd>Lspsaga lsp_finder<CR>", opts)
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+	local keymap = vim.keymap.set
+	keymap("n", "J", vim.diagnostic.open_float, opts)
+	keymap("n", "<leader>f", function()
+		vim.lsp.buf.format({ async = true })
+	end, opts)
+	keymap("n", "gd", vim.lsp.buf.definition, opts)
 
 	-- Code action
-	keymap(bufnr, "n", "<leader>a", "<cmd>Lspsaga code_action<CR>", opts)
-	keymap(bufnr, "v", "<leader>a", "<cmd><C-U>Lspsaga range_code_action<CR>", opts)
+	keymap("n", "<leader>a", vim.lsp.buf.code_action, opts)
 
 	-- Hover doc
-	keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
-	-- Signature help
-	keymap(bufnr, "n", "gs", "<Cmd>Lspsaga signature_help<CR>", opts)
+	keymap("n", "K", vim.lsp.buf.hover, opts)
 	-- Rename
-	keymap(bufnr, "n", "gr", "<cmd>Lspsaga rename<CR>", opts)
+	keymap("n", "gr", vim.lsp.buf.rename, opts)
 	-- Preview definition
-	keymap(bufnr, "n", "gD", "<cmd>Lspsaga preview_definition<CR>", opts)
+	keymap("n", "gD", vim.lsp.buf.declaration, opts)
 	-- Jump to error
-	keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-	keymap(bufnr, "n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+	keymap("n", "]e", vim.diagnostic.goto_next, opts)
+	keymap("n", "[e", vim.diagnostic.goto_prev, opts)
 end
 
 M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
-		client.server_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 	end
 
 	if client.name == "html" then
-		client.server_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 	end
 
 	if client.name == "sumneko_lua" then
-		client.server_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 	end
 
 	if client.name == "gopls" then
-		client.server_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 	end
 
 	lsp_keymaps(bufnr)
