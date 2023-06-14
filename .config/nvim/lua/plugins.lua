@@ -90,7 +90,12 @@ return packer.startup(function(use)
   use({
     "akinsho/git-conflict.nvim",
     config = function()
-      require("git-conflict").setup()
+      require("git-conflict").setup {
+        default_mappings = {
+          next = ']x',
+          prev = '[x',
+        },
+      }
     end,
   })
   -- Git diff view

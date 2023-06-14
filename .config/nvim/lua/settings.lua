@@ -41,3 +41,14 @@ opt.conceallevel = 0
 opt.title = true
 opt.spell = false
 opt.spelllang = "en"
+
+-- Highlight when yank
+vim.api.nvim_exec(
+  [[
+    augroup highlight_yank
+        autocmd!
+        au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+    augroup END
+  ]],
+  false
+)
