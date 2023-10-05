@@ -6,7 +6,8 @@ local servers = {
   "jsonls",
   "svelte",
   "intelephense",
-  "pyright"
+  "pyright",
+  "tailwindcss"
 }
 
 local settings = {
