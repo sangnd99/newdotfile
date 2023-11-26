@@ -28,11 +28,6 @@ configs.setup({
     additional_vim_regex_highlighting = true,
     disable = { "latex" },
   },
-  context_commentstring = {
-    enable = true,
-    config = { css = "// %s" },
-    enable_autocmd = false,
-  },
   autotag = {
     enable = true,
     enable_close_on_slash = false,

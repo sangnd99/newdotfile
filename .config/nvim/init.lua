@@ -1,7 +1,6 @@
 require("plugins")
-require("settings")
 require("mappings")
-require("colorscheme")
+require("settings")
 
 -- LSP
 require("lsp")
