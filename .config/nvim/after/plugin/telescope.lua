@@ -69,6 +69,7 @@ key.set("n", "<space>e", function()
 		previewer = false,
 		initial_mode = "normal",
 		layout_config = { height = 40 },
+    dir_icon = ""
 	})
 end, opts)
 key.set("n", "'f", builtin.find_files, opts)
