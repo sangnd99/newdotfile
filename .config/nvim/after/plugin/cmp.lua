@@ -41,10 +41,11 @@ local kind_icons = {
   Struct = "󰙅",
   Event = "",
   Operator = "󰆕",
-  TypeParameter = "",
+  TypeParameter = " ",
+	Misc = " ",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
---
+
 cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
