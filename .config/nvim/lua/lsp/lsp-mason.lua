@@ -7,7 +7,8 @@ local servers = {
   "svelte",
   "intelephense",
   "pyright",
-  "tailwindcss"
+  "tailwindcss",
+  "bashls"
 }
 
 local settings = {
