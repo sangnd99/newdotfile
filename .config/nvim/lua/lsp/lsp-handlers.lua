@@ -80,6 +80,8 @@ local function lsp_keymaps(bufnr)
   keymap("n", "gr", vim.lsp.buf.rename, opts)
   -- Preview definition
   keymap("n", "gD", vim.lsp.buf.declaration, opts)
+  -- Show all errors in bottom sheet
+  keymap("n", "ge", vim.diagnostic.setqflist, opts)
   -- Jump to error
   keymap("n", "]e", vim.diagnostic.goto_next, opts)
   keymap("n", "[e", vim.diagnostic.goto_prev, opts)

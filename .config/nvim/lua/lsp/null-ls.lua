@@ -12,7 +12,6 @@ null_ls.setup({
 	debug = false,
 	sources = {
 		formatting.prettier,
-		diagnostics.eslint,
 		formatting.stylua,
 		formatting.gofmt,
 	},
