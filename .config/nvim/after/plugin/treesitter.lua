@@ -28,9 +28,5 @@ configs.setup({
     additional_vim_regex_highlighting = true,
     disable = { "latex" },
   },
-  autotag = {
-    enable = true,
-    enable_close_on_slash = false,
-  },
   indent = { enable = true, disable = { "python", "css" } },
 })
