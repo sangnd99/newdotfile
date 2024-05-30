@@ -57,7 +57,7 @@ require("lazy").setup({
             CursorLine = { bg = c.vscCursorDark },
             CursorColumn = { fg = 'NONE', bg = c.vscCursorDark },
             ColorColumn = { fg = 'NONE', bg = c.vscCursorDark },
-            GitSignsCurrentLineBlame = { fg = c.vscFront }
+            GitSignsCurrentLineBlame = { fg = c.vscCursorLight }
         }
 			})
 
