@@ -54,6 +54,10 @@ require("lazy").setup({
             -- use colors from this colorscheme by requiring vscode.colors!
             Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
             EndOfBuffer = { fg=c.vscBack },
+            CursorLine = { bg = c.vscCursorDark },
+            CursorColumn = { fg = 'NONE', bg = c.vscCursorDark },
+            ColorColumn = { fg = 'NONE', bg = c.vscCursorDark },
+            GitSignsCurrentLineBlame = { fg = c.vscFront }
         }
 			})
 
