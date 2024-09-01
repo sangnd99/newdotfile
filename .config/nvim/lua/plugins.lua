@@ -26,39 +26,39 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 		config = function()
-      local c = require("vscode.colors").get_colors()
+			local c = require("vscode.colors").get_colors()
 			require("vscode").setup({
-        -- Alternatively set style in setup
-        -- style = 'light'
+				-- Alternatively set style in setup
+				-- style = 'light'
 
-        -- Enable transparent background
-        transparent = true,
+				-- Enable transparent background
+				transparent = true,
 
-        -- Enable italic comment
-        italic_comments = true,
+				-- Enable italic comment
+				italic_comments = true,
 
-        -- Underline `@markup.link.*` variants
-        underline_links = true,
+				-- Underline `@markup.link.*` variants
+				underline_links = true,
 
-        -- Disable nvim-tree background color
-        disable_nvimtree_bg = true,
+				-- Disable nvim-tree background color
+				disable_nvimtree_bg = true,
 
-        -- Override colors (see ./lua/vscode/colors.lua)
-        -- color_overrides = {
-        --     vscLineNumber = '#FFFFFF',
-        -- },
+				-- Override colors (see ./lua/vscode/colors.lua)
+				-- color_overrides = {
+				--     vscLineNumber = '#FFFFFF',
+				-- },
 
-        -- Override highlight groups (see ./lua/vscode/theme.lua)
-        group_overrides = {
-            -- this supports the same val table as vim.api.nvim_set_hl
-            -- use colors from this colorscheme by requiring vscode.colors!
-            Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
-            EndOfBuffer = { fg=c.vscBack },
-            CursorLine = { bg = c.vscCursorDark },
-            CursorColumn = { fg = 'NONE', bg = c.vscCursorDark },
-            ColorColumn = { fg = 'NONE', bg = c.vscCursorDark },
-            GitSignsCurrentLineBlame = { fg = c.vscCursorLight }
-        }
+				-- Override highlight groups (see ./lua/vscode/theme.lua)
+				group_overrides = {
+					-- this supports the same val table as vim.api.nvim_set_hl
+					-- use colors from this colorscheme by requiring vscode.colors!
+					Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
+					EndOfBuffer = { fg = c.vscBack },
+					CursorLine = { bg = c.vscCursorDark },
+					CursorColumn = { fg = "NONE", bg = c.vscCursorDark },
+					ColorColumn = { fg = "NONE", bg = c.vscCursorDark },
+					GitSignsCurrentLineBlame = { fg = c.vscCursorLight },
+				},
 			})
 
 			vim.api.nvim_exec(
@@ -82,9 +82,9 @@ require("lazy").setup({
 	--
 	-- 		vim.api.nvim_exec(
 	-- 			[[
- --                set termguicolors
- --                colorscheme onedark
- --            ]],
+	--                set termguicolors
+	--                colorscheme onedark
+	--            ]],
 	-- 			false
 	-- 		)
 	-- 	end,
@@ -159,21 +159,28 @@ require("lazy").setup({
 			})
 		end,
 	},
-  -- Tabline
-  "akinsho/bufferline.nvim",
-  -- Colorizer
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({ "*" }, {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
-        RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true, -- CSS rgb() and rgba() functions
-        hsl_fn = true, -- CSS hsl() and hsla() functions
-        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      })
-    end
-  }
+	-- Tabline
+	"akinsho/bufferline.nvim",
+	-- Colorizer
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({ "*" }, {
+				RGB = true, -- #RGB hex codes
+				RRGGBB = true, -- #RRGGBB hex codes
+				RRGGBBAA = true, -- #RRGGBBAA hex codes
+				rgb_fn = true, -- CSS rgb() and rgba() functions
+				hsl_fn = true, -- CSS hsl() and hsla() functions
+				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+			})
+		end,
+	},
+	{
+		"barrett-ruth/import-cost.nvim",
+		build = "sh install.sh yarn",
+		-- if on windows
+		-- build = 'pwsh install.ps1 yarn',
+		config = true,
+	},-- Import cost
 })
