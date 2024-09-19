@@ -176,11 +176,32 @@ require("lazy").setup({
 			})
 		end,
 	},
+  -- Import cost
 	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh yarn",
 		-- if on windows
 		-- build = 'pwsh install.ps1 yarn',
 		config = true,
-	},-- Import cost
+	},
+  -- Lazygit
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>l", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  }
 })
