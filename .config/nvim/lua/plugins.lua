@@ -20,7 +20,7 @@ end
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
-require("lazy").setup({
+lazy.setup({
 	{
 		"Mofiqul/vscode.nvim",
 		lazy = false,
@@ -116,13 +116,15 @@ require("lazy").setup({
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 	},
-	-- Telescope and file browser
+	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.4",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+  -- Telescope extentions
 	"nvim-telescope/telescope-file-browser.nvim",
+  "olacin/telescope-cc.nvim",
 	-- Dev icon
 	"nvim-tree/nvim-web-devicons",
 	{

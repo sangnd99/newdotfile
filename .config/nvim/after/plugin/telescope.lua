@@ -4,12 +4,6 @@ if not status_ok then
 end
 
 local actions = require("telescope.actions")
-local builtin = require("telescope.builtin")
-local key = vim.keymap
-local function telescope_buffer_dir()
-	return vim.fn.expand("%:p:h")
-end
-local opts = { noremap = true, silent = true }
 
 telescope.setup({
 	defaults = {
@@ -48,6 +42,9 @@ telescope.setup({
 			-- disables netrw and use telescope-file-browser in its place
 			hijack_netrw = true,
 		},
+    conventional_commits = {
+      theme = "dropdown"
+    }
 		-- Your extension configuration goes here:
 		-- extension_name = {
 		--   extension_config_key = value,
@@ -56,21 +53,6 @@ telescope.setup({
 	},
 })
 
+-- Telescope extentions
 telescope.load_extension("file_browser")
-
--- Keymappings
-key.set("n", "<space>e", function()
-	telescope.extensions.file_browser.file_browser({
-		path = "%:p:h",
-		cwd = telescope_buffer_dir(),
-		respect_gitignore = false,
-		hidden = true,
-		grouped = true,
-		previewer = false,
-		initial_mode = "normal",
-		layout_config = { height = 40 },
-    dir_icon = ""
-	})
-end, opts)
-key.set("n", "'f", builtin.find_files, opts)
-key.set("n", "'b", builtin.buffers, opts)
+telescope.load_extension("conventional_commits")
