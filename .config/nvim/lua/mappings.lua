@@ -29,5 +29,5 @@ map("n", "<C-k>", "<CMD>NavigatorUp<CR>", opts)
 map("n", "<C-j>", "<CMD>NavigatorDown<CR>", opts)
 map("n", "<C-p>", "<CMD>NavigatorPrevious<CR>", opts)
 -- Buffer line traveling
-map("n", "]b", ":BufferLineCycleNext<CR>", opts)
-map("n", "[b", ":BufferLineCyclePrev<CR>", opts)
+map("n", "]b", "<CMD>BufferNext<CR>", opts)
+map("n", "[b", "<CMD>BufferPrevious<CR>", opts)

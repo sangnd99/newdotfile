@@ -70,26 +70,6 @@ lazy.setup({
 			)
 		end,
 	},
-	-- {
-	-- 	"navarasu/onedark.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("onedark").setup({
-	-- 			style = "cool",
-	-- 			transparent = true,
-	-- 		})
-	--
-	-- 		vim.api.nvim_exec(
-	-- 			[[
-	--                set termguicolors
-	--                colorscheme onedark
-	--            ]],
-	-- 			false
-	-- 		)
-	-- 	end,
-	-- },
-	-- LSP
 	"neovim/nvim-lspconfig",
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
@@ -122,9 +102,9 @@ lazy.setup({
 		tag = "0.1.4",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-  -- Telescope extentions
+	-- Telescope extentions
 	"nvim-telescope/telescope-file-browser.nvim",
-  "olacin/telescope-cc.nvim",
+	"olacin/telescope-cc.nvim",
 	-- Dev icon
 	"nvim-tree/nvim-web-devicons",
 	{
@@ -162,7 +142,23 @@ lazy.setup({
 		end,
 	},
 	-- Tabline
-	"akinsho/bufferline.nvim",
+	{
+		"romgrk/barbar.nvim",
+		dependencies = {
+			"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+			"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+		},
+		init = function()
+			vim.g.barbar_auto_setup = false
+		end,
+		opts = {
+			-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+			-- animation = true,
+			-- insert_at_start = true,
+			-- …etc.
+		},
+		version = "^1.0.0", -- optional: only update when a new 1.x version is released
+	},
 	-- Colorizer
 	{
 		"norcalli/nvim-colorizer.lua",
@@ -178,7 +174,7 @@ lazy.setup({
 			})
 		end,
 	},
-  -- Import cost
+	-- Import cost
 	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh yarn",
@@ -186,24 +182,24 @@ lazy.setup({
 		-- build = 'pwsh install.ps1 yarn',
 		config = true,
 	},
-  -- Lazygit
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { "<leader>l", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
-  }
+	-- Lazygit
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>l", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
+	},
 })
