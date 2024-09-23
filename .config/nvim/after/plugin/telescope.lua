@@ -4,6 +4,9 @@ if not status_ok then
 end
 
 local actions = require("telescope.actions")
+local key = vim.keymap
+local opts = { noremap = true, silent = true }
+local builtin = require("telescope.builtin")
 
 telescope.setup({
 	defaults = {
@@ -28,17 +31,22 @@ telescope.setup({
 	},
 	pickers = {
 		-- Default configuration for builtin pickers goes here:
-		-- picker_name = {
-		--   picker_config_key = value,
-		--   ...
-		-- }
+		find_files = {
+      theme = "dropdown",
+      previewer = false,
+      layout_config = { height = 40 },
+		},
+		buffers = {
+      theme = "dropdown",
+      previewer = false,
+      layout_config = { height = 40 },
+		}
 		-- Now the picker_config_key will be applied every time you call this
 		-- builtin picker
 	},
 	extensions = {
 		file_browser = {
 			theme = "dropdown",
-			initial_mode = "normal",
 			-- disables netrw and use telescope-file-browser in its place
 			hijack_netrw = true,
 		},
@@ -56,3 +64,7 @@ telescope.setup({
 -- Telescope extentions
 telescope.load_extension("file_browser")
 telescope.load_extension("conventional_commits")
+
+-- Keymapping
+key.set("n", "'f", builtin.find_files, opts)
+key.set("n", "'b", builtin.buffers, opts)

@@ -8,7 +8,6 @@ local opts = { noremap = true, silent = true }
 local function telescope_buffer_dir()
 	return vim.fn.expand("%:p:h")
 end
-local builtin = require("telescope.builtin")
 
 key.set("n", "<space>e", function()
 	telescope.extensions.file_browser.file_browser({
@@ -23,5 +22,3 @@ key.set("n", "<space>e", function()
     dir_icon = ""
 	})
 end, opts)
-key.set("n", "'f", builtin.find_files, opts)
-key.set("n", "'b", builtin.buffers, opts)
