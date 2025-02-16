@@ -78,19 +78,7 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 
 					-- Accept currently selected item
-					["<CR>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							if luasnip.expandable() then
-								luasnip.expand()
-							else
-								cmp.confirm({
-									select = true,
-								})
-							end
-						else
-							fallback()
-						end
-					end),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 
 					-- Select next item
 					["<Tab>"] = cmp.mapping(function(fallback)
@@ -130,6 +118,10 @@ return {
 					ghost_text = false,
 					native_menu = false,
 				},
+				confirm_opts = {
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = false,
+				}
 			})
 
 			-- Add theme color to menu
