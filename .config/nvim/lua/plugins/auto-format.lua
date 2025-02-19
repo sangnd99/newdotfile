@@ -14,7 +14,14 @@ return {
 				},
 			})
 
-			vim.keymap.set({ "n", "v" }, "<leader>f", "<cmd>lua vim.lsp.buf.format()<cr>", { desc = "Formatting" })
+			vim.keymap.set({ "n", "v" }, "<leader>f", function()
+				vim.lsp.buf.format({
+					filter = function(client)
+						return client.name == "null-ls" or client.name == "none-ls"
+					end,
+					async = true,
+				})
+			end, { desc = "Formatting" })
 		end,
 	},
 }
