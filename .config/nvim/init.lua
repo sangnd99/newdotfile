@@ -10,6 +10,7 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
 -- Settings
+vim.opt.termguicolors = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smarttab = true

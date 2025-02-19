@@ -57,10 +57,10 @@ return {
 
 			cmp.setup({
 				formatting = {
-					fileds = { "kind", "abbr" },
-					format = function(_, vim_item)
+					fields = { "kind", "abbr" },
+					format = function(entry, vim_item)
 						vim_item.kind = (kind_icons[vim_item.kind] or "") .. vim_item.kind
-						return vim_item
+						return require("nvim-highlight-colors").format(entry, vim_item)
 					end,
 				},
 				snippet = {
@@ -84,7 +84,7 @@ return {
 					["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 
 					-- Select previous item
-					["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+					["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 				}),
 				sources = {
 					{ name = "nvim_lsp" },
@@ -105,7 +105,7 @@ return {
 				confirm_opts = {
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = false,
-				}
+				},
 			})
 
 			-- Add theme color to menu
