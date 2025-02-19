@@ -1,29 +1,18 @@
 return {
 	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_format = 'fallback' })
-				end,
-				mode = "",
-				desc = "[F]ormat buffer",
-			}
+		'nvimtools/none-ls.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim'
 		},
-		opts = {
-			notify_on_error = false,
-			formatters_by_ft = {
-				lua = { "stylua" },
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				typescript = { "prettierd", "prettier", stop_after_first = true },
-				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-				css = { "prettierd", "prettier", stop_after_first = true },
-				html = { "prettierd", "prettier", stop_after_first = true },
-			},
-		},
-	},
+		config = function()
+			local null_ls = require('null-ls')
+			null_ls.setup({
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.formatting.prettier,
+				null_ls.builtins.completion.spell
+			})
+
+			vim.keymap.set('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>', { desc = 'Formatting' })
+		end
+	}
 }
