@@ -58,9 +58,9 @@ return {
 			cmp.setup({
 				formatting = {
 					fields = { "abbr", "kind" },
-					format = function(entry, vim_item)
+					format = function(_, vim_item)
 						vim_item.kind = (kind_icons[vim_item.kind] or "") .. vim_item.kind
-						return require("nvim-highlight-colors").format(entry, vim_item)
+						return vim_item
 					end,
 				},
 				snippet = {
