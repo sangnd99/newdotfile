@@ -1,7 +1,7 @@
 return {
 	"nvim-tree/nvim-web-devicons", -- Icons
 	{ "sindrets/diffview.nvim", opts = {} },
-	"windwp/nvim-ts-autotag",
+	{ "windwp/nvim-ts-autotag", opts = {} },
 	{
 		"barrett-ruth/import-cost.nvim",
 		build = "sh install.sh yarn",
