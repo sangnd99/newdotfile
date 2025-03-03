@@ -61,6 +61,7 @@ return {
 			})
 
 			telescope.load_extension("file_browser")
+			telescope.load_extension("rest")
 
 			vim.keymap.set("n", "'f", builtin.find_files, { desc = "Global find file" })
 			vim.keymap.set("n", "'b", builtin.buffers, { desc = "Opened buffer" })

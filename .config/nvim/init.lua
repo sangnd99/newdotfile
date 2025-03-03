@@ -42,6 +42,59 @@ vim.api.nvim_exec(
   ]],
 	false
 )
+-- status line config
+vim.o.statusline = table.concat({
+	"%#PmenuSel#",
+	" %{%v:lua.Mode()%} ",
+	"%#Normal#", -- Mode
+	" %f",
+	"%m", -- File path & modified flag
+	" %=", -- Right alignment
+	"%c:%l",
+	"%{%v:lua.LspDiagnostics()%} ", -- LSP Diagnostics
+	"%{%v:lua.Cwd()%} ", -- Current working directory
+	"%y ",
+})
+
+function _G.Cwd()
+	return "%#PmenuSel#  " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":~") .. " %#Normal#"
+end
+
+-- Function to show Vim mode
+function _G.Mode()
+	local mode_map = {
+		n = "NORMAL",
+		i = "INSERT",
+		v = "VISUAL",
+		V = "V-LINE",
+		[""] = "V-BLOCK",
+		c = "COMMAND",
+		s = "SELECT",
+		S = "S-LINE",
+		[""] = "S-BLOCK",
+		R = "REPLACE",
+		t = "TERMINAL",
+	}
+	return mode_map[vim.fn.mode()] or "UNKNOWN"
+end
+
+-- Function to count LSP diagnostics
+function _G.LspDiagnostics()
+	local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+	local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+
+	return table.concat({
+		"%#DiagnosticError#",
+		" :",
+		errors,
+		" ",
+		"%#DiagnosticWarn#",
+		" :",
+		warnings,
+		" ",
+		"%#Normal#", -- Reset highlight to default
+	})
+end
 
 -- Keymappings
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
