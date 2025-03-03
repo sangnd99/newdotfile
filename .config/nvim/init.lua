@@ -47,18 +47,13 @@ vim.o.statusline = table.concat({
 	"%#PmenuSel#",
 	" %{%v:lua.Mode()%} ",
 	"%#Normal#", -- Mode
-	" %f",
+	"  %f",
 	"%m", -- File path & modified flag
 	" %=", -- Right alignment
 	"%c:%l",
 	"%{%v:lua.LspDiagnostics()%} ", -- LSP Diagnostics
-	"%{%v:lua.Cwd()%} ", -- Current working directory
 	"%y ",
 })
-
-function _G.Cwd()
-	return "%#PmenuSel#  " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":~") .. " %#Normal#"
-end
 
 -- Function to show Vim mode
 function _G.Mode()
