@@ -42,52 +42,56 @@ vim.api.nvim_exec(
   ]],
 	false
 )
+vim.o.statusline = "%!v:lua.StatusLine()"
+
 -- status line config
-vim.o.statusline = table.concat({
-	"%#PmenuSel#",
-	" %{%v:lua.Mode()%} ",
-	"%#Normal#", -- Mode
-	"  %f",
-	"%m", -- File path & modified flag
-	" %=", -- Right alignment
-	"%c:%l",
-	"%{%v:lua.LspDiagnostics()%} ", -- LSP Diagnostics
-	"%y ",
-})
-
--- Function to show Vim mode
-function _G.Mode()
+function _G.StatusLine()
+	-- Variables
+	local RESET = "%#Normal#"
+	-- Mapping mode
 	local mode_map = {
-		n = "NORMAL",
-		i = "INSERT",
-		v = "VISUAL",
-		V = "V-LINE",
-		[""] = "V-BLOCK",
-		c = "COMMAND",
-		s = "SELECT",
-		S = "S-LINE",
-		[""] = "S-BLOCK",
-		R = "REPLACE",
-		t = "TERMINAL",
+		n = "%#PmenuSel# NORMAL ",
+		i = "%#PmenuSel# INSERT ",
+		v = "%#PmenuSel# VISUAL ",
+		V = "%#PmenuSel# V-LINE ",
+		[""] = "%#PmenuSel# V-BLOCK ",
+		c = "%#PmenuSel# COMMAND ",
+		s = "%#PmenuSel# SELECT ",
+		S = "%#PmenuSel# S-LINE ",
+		[""] = "%#PmenuSel# S-BLOCK ",
+		R = "%#PmenuSel# REPLACE ",
+		t = "%#PmenuSel# TERMINAL ",
 	}
-	return mode_map[vim.fn.mode()] or "UNKNOWN"
-end
-
--- Function to count LSP diagnostics
-function _G.LspDiagnostics()
+	-- Get diagnostics
 	local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
 	local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+	local diagnostics = string.format("%%#DiagnosticError#:%d %%#DiagnosticWarn#:%d", errors, warnings)
+
+	-- Get file type
+	local file_name = vim.fn.expand("%:t") ~= "" and vim.fn.expand("%:t") or "[No Name]"
+	local file_type = vim.bo.filetype
+	local devicons = require("nvim-web-devicons")
+	local icon, icon_color = devicons.get_icon_color(file_name, vim.fn.expand("%:e"), { default = true })
+	if (icon_color) then
+		vim.api.nvim_set_hl(0, "StatusLineIcon", { fg = icon_color, bg = "#1E1E2E" })
+	end
 
 	return table.concat({
-		"%#DiagnosticError#",
-		" :",
-		errors,
+		mode_map[vim.fn.mode()],
+		RESET,
 		" ",
-		"%#DiagnosticWarn#",
-		" :",
-		warnings,
+		" %f",
+		"%=",
+		"%c:%l", -- line column
 		" ",
-		"%#Normal#", -- Reset highlight to default
+		diagnostics,
+		" ",
+		RESET,
+		" ",
+		"%#StatusLineIcon#",
+		icon,
+		" ",
+		file_type,
 	})
 end
 

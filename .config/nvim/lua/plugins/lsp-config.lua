@@ -149,13 +149,13 @@ return {
 						tailwindCSS = {
 							experimental = {
 								classRegex = {
-									-- "([a-zA-Z0-9\\-:]+)"
+									{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
 								},
 							},
 						},
 					},
 				},
-				gopls = {}
+				gopls = {},
 			}
 
 			local ensure_installed = vim.tbl_keys(servers or {})
