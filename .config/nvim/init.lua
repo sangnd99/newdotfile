@@ -74,7 +74,7 @@ function _G.StatusLine()
 	local devicons = require("nvim-web-devicons")
 	local icon, icon_color = devicons.get_icon_color(file_name, vim.fn.expand("%:e"), { default = true })
 	if icon_color then
-		vim.api.nvim_set_hl(0, "StatusLineIcon", { fg = icon_color, bg = "#1E1E2E" })
+		vim.api.nvim_set_hl(0, "StatusLineIcon", { fg = icon_color, bg = "NONE" })
 	end
 
 	return table.concat({
