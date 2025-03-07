@@ -1,5 +1,11 @@
 return {
-	"nvim-tree/nvim-web-devicons", -- Icons
+	{
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			vim.g.webdevicons_enable = 1
+			vim.g.webdevicons_enable_netrw = 1
+		end,
+	}, -- Icons
 	{ "sindrets/diffview.nvim", opts = {} },
 	{ "windwp/nvim-ts-autotag", opts = {} },
 	{

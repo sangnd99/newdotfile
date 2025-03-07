@@ -4,7 +4,6 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-file-browser.nvim",
 		},
 		config = function()
 			local status_ok, telescope = pcall(require, "telescope")
@@ -13,9 +12,6 @@ return {
 			end
 			local builtin = require("telescope.builtin")
 			local actions = require("telescope.actions")
-			local function telescope_buffer_dir()
-				return vim.fn.expand("%:p:h")
-			end
 
 			telescope.setup({
 				defaults = {
@@ -60,24 +56,10 @@ return {
 				},
 			})
 
-			telescope.load_extension("file_browser")
 			telescope.load_extension("rest")
 
 			vim.keymap.set("n", "'f", builtin.find_files, { desc = "Global find file" })
 			vim.keymap.set("n", "'b", builtin.buffers, { desc = "Opened buffer" })
-			vim.keymap.set("n", "<leader>e", function()
-				telescope.extensions.file_browser.file_browser({
-					path = "%:p:h",
-					cwd = telescope_buffer_dir(),
-					respect_gitignore = false,
-					hidden = true,
-					grouped = true,
-					previewer = false,
-					initial_mode = "normal",
-					layout_config = { height = 40 },
-					dir_icon = "",
-				})
-			end, { desc = "Telescope file explorer" })
 		end,
 	},
 }

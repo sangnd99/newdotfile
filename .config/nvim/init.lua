@@ -8,6 +8,7 @@ Author: Sang Nguyen(gnas129)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
+vim.g.netrw_banner = 0
 
 -- Settings
 vim.opt.termguicolors = true
@@ -72,7 +73,7 @@ function _G.StatusLine()
 	local file_type = vim.bo.filetype
 	local devicons = require("nvim-web-devicons")
 	local icon, icon_color = devicons.get_icon_color(file_name, vim.fn.expand("%:e"), { default = true })
-	if (icon_color) then
+	if icon_color then
 		vim.api.nvim_set_hl(0, "StatusLineIcon", { fg = icon_color, bg = "#1E1E2E" })
 	end
 
@@ -95,7 +96,22 @@ function _G.StatusLine()
 	})
 end
 
+-- Explorer
+function _G.ToggleNetrw()
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		if vim.bo[buf].filetype == "netrw" then
+			vim.cmd("bd")
+			return
+		end
+	end
+
+	-- Open Netrw if not open
+	vim.cmd("Explore")
+end
+
 -- Keymappings
+vim.keymap.set("n", "<leader>e", "<cmd>lua ToggleNetrw()<cr>", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
 vim.keymap.set("i", "jk", "<esc>", { desc = "Set to normal mode" })
 vim.keymap.set("i", "kj", "<esc>", { desc = "Set to normal mode" })
