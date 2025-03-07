@@ -34,6 +34,7 @@ vim.opt.splitright = true
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.showtabline = 2
 vim.api.nvim_exec(
 	[[
     augroup highlight_yank
@@ -43,9 +44,43 @@ vim.api.nvim_exec(
   ]],
 	false
 )
-vim.o.statusline = "%!v:lua.StatusLine()"
+vim.opt.statusline = "%!v:lua.StatusLine()"
+vim.o.tabline = "%!v:lua.BufferLine()"
 
--- status line config
+-- Tab bar
+function _G.BufferLine()
+	local s = ""
+	local buffers = vim.api.nvim_list_bufs()
+	local current_buf = vim.api.nvim_get_current_buf()
+	local has_devicons, devicons = pcall(require, "nvim-web-devicons")
+
+	local buf_index = 1
+	for _, buf in ipairs(buffers) do
+		if vim.api.nvim_buf_get_option(buf, "buflisted") then
+			local bufname = vim.api.nvim_buf_get_name(buf)
+			local filename = bufname ~= "" and vim.fn.fnamemodify(bufname, ":t") or "[No Name]"
+			local modified = vim.api.nvim_buf_get_option(buf, "modified") and "[+]" or ""
+
+			-- Get icon
+			local icon = ""
+			if has_devicons then
+				local ext = vim.fn.fnamemodify(filename, ":e")
+				icon = devicons.get_icon(filename, ext, { default = true }) or ""
+			end
+
+			-- Highlight the active buffer
+			local hl = (buf == current_buf) and "%#PmenuSel#" or "%#TabLine#"
+
+			s = s .. string.format("%%%dT%s %d: %s %s %s ", buf, hl, buf_index, icon, filename, modified)
+			buf_index = buf_index + 1
+		end
+	end
+
+	s = s .. "%#TabLineFill#%T"
+	return s
+end
+
+-- Status line config
 function _G.StatusLine()
 	-- Variables
 	local RESET = "%#Normal#"
@@ -110,6 +145,120 @@ function _G.ToggleNetrw()
 	vim.cmd("Explore")
 end
 
+-- Customize Netrw
+local TYPE_DIR = 0
+local TYPE_FILE = 1
+local TYPE_SYMLINK = 2
+
+local get_node = function(line)
+	if string.find(line, '^"') then
+		return nil
+	end
+	-- When netrw is empty, there's one line in the buffer and it is empty.
+	if line == "" then
+		return nil
+	end
+
+	local curdir = vim.b.netrw_curdir
+	local _, _, node, link = string.find(line, "^(.+)@\t%s*%-%->%s*(.+)")
+
+	if node then
+		return {
+			dir = curdir,
+			col = 0,
+			node = node,
+			extension = vim.fn.fnamemodify(node, ":e"),
+			link = link,
+			type = TYPE_SYMLINK,
+		}
+	end
+
+	local _, _, dir = string.find(line, "^(.*)/")
+	if dir then
+		return {
+			dir = curdir,
+			col = 0,
+			node = dir,
+			type = TYPE_DIR,
+		}
+	end
+
+	local ext = vim.fn.fnamemodify(line, ":e")
+	if string.sub(ext, -1) == "*" then
+		ext = string.sub(ext, 1, -2)
+		line = string.sub(line, 1, -2)
+	end
+
+	return {
+		dir = curdir,
+		col = 0,
+		node = line,
+		extension = ext,
+		type = TYPE_FILE,
+	}
+end
+
+vim.api.nvim_create_autocmd("BufModifiedSet", {
+	pattern = { "*" },
+	callback = function()
+		if not (vim.bo and vim.bo.filetype == "netrw") then
+			return
+		end
+
+		if vim.b.netrw_liststyle ~= 0 and vim.b.netrw_liststyle ~= 1 and vim.b.netrw_liststyle ~= 3 then
+			return
+		end
+
+		local namespace = vim.api.nvim_create_namespace("netrw")
+		local bufnr = vim.api.nvim_get_current_buf()
+		local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+		for i, line in ipairs(lines) do
+			local node = get_node(line)
+			if not node then
+				goto continue
+			end
+
+			local opts = { id = i }
+			local icon = ""
+			local hl_group = ""
+
+			if node.node ~= ".." and node.node ~= "." then
+				if node.type == TYPE_FILE then
+					icon = ""
+					local has_devicons, devicons = pcall(require, "nvim-web-devicons")
+
+					if has_devicons then
+						local ic, hi = devicons.get_icon(node.node, nil, { strict = true, default = false })
+						if ic then
+							icon = ic
+							hl_group = hi
+						end
+					end
+				elseif node.type == TYPE_DIR then
+					icon = ""
+				elseif node.type == TYPE_SYMLINK then
+					icon = ""
+				end
+			end
+
+			if node.col == 0 then
+				if hl_group then
+					opts.sign_hl_group = hl_group
+				end
+				opts.sign_text = icon
+
+				vim.api.nvim_buf_set_extmark(bufnr, namespace, i - 1, math.max(0, node.col - 2), opts)
+			end
+			::continue::
+		end
+
+		-- Fixes weird case where the cursor spawns inside of the sign column.
+		vim.cmd([[norm lh]])
+	end,
+	group = vim.api.nvim_create_augroup("netrw", { clear = false }),
+})
+
 -- Keymappings
 vim.keymap.set("n", "<leader>e", "<cmd>lua ToggleNetrw()<cr>", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
@@ -119,6 +268,8 @@ vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Moving block to top" })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Moving block to bottom" })
 vim.keymap.set("v", "<", "<gv", { desc = "Untab block" })
 vim.keymap.set("v", ">", ">gv", { desc = "Tab block" })
+vim.keymap.set("n", "]b", "<cmd>bn<cr>", { desc = "Move to next buffer" })
+vim.keymap.set("n", "[b", "<cmd>bp<cr>", { desc = "Move to prev buffer" })
 
 -- Plugins
 -- [[ Using `lazy.nvim` for plugins manager ]]
