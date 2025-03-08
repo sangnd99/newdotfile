@@ -68,8 +68,7 @@ function _G.BufferLine()
 				icon = devicons.get_icon(filename, ext, { default = true }) or ""
 			end
 
-			-- Highlight the active buffer
-			local hl = (buf == current_buf) and "%#PmenuSel#" or "%#TabLine#"
+			local hl = (buf == current_buf) and "%#TabLine#" or "%#NonText#"
 
 			s = s .. string.format("%%%dT%s %d: %s %s %s ", buf, hl, buf_index, icon, filename, modified)
 			buf_index = buf_index + 1
