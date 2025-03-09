@@ -60,6 +60,9 @@ return {
 
 			vim.keymap.set("n", "'f", builtin.find_files, { desc = "Global find file" })
 			vim.keymap.set("n", "'b", builtin.buffers, { desc = "Opened buffer" })
+			vim.keymap.set("n", "'s", function()
+				builtin.grep_string({ search = vim.fn.input("Grep > ") })
+			end, { desc = "Grep search" })
 		end,
 	},
 }
