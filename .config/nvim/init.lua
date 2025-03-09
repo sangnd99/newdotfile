@@ -254,8 +254,27 @@ vim.api.nvim_create_autocmd("BufModifiedSet", {
 
 		-- Fixes weird case where the cursor spawns inside of the sign column.
 		vim.cmd([[norm lh]])
+
+		-- Keymapping netrw
 	end,
 	group = vim.api.nvim_create_augroup("netrw", { clear = false }),
+})
+
+-- Netrw keybinding
+vim.api.nvim_create_autocmd("filetype", {
+	pattern = "netrw",
+	desc = "Better mappings for netrw",
+	callback = function()
+		local bind = function(lhs, rhs)
+			vim.keymap.set("n", lhs, rhs, { remap = true, buffer = true })
+		end
+
+		-- edit new file
+		bind("c", "%")
+
+		-- rename file
+		bind("r", "R")
+	end,
 })
 
 -- Keymappings
