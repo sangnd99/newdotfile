@@ -58,9 +58,9 @@ return {
 
 			telescope.load_extension("rest")
 
-			vim.keymap.set("n", "'f", builtin.find_files, { desc = "Global find file" })
-			vim.keymap.set("n", "'b", builtin.buffers, { desc = "Opened buffer" })
-			vim.keymap.set("n", "'s", function()
+			vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Global find file" })
+			vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Opened buffer" })
+			vim.keymap.set("n", "<leader>ps", function()
 				builtin.grep_string({ search = vim.fn.input("Grep > ") })
 			end, { desc = "Grep search" })
 		end,
