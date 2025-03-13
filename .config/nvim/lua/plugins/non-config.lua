@@ -14,5 +14,5 @@ return {
 		-- if on windows
 		-- build = 'pwsh install.ps1 yarn',
 		config = true,
-	},
+	}
 }
