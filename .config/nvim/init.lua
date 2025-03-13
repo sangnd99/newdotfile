@@ -288,6 +288,10 @@ vim.keymap.set("v", "<", "<gv", { desc = "Untab block" })
 vim.keymap.set("v", ">", ">gv", { desc = "Tab block" })
 vim.keymap.set("n", "]b", "<cmd>bn<cr>", { desc = "Move to next buffer" })
 vim.keymap.set("n", "[b", "<cmd>bp<cr>", { desc = "Move to prev buffer" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up but keep cursor center" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down but keep cursor center" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next match but keep cursor center" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to prev match but keep cursor center" })
 
 -- Plugins
 -- [[ Using `lazy.nvim` for plugins manager ]]
