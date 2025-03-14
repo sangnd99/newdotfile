@@ -142,6 +142,7 @@ function _G.ToggleNetrw()
 
 	-- Open Netrw if not open
 	vim.cmd("Explore")
+	vim.cmd("normal! gg")
 end
 
 -- Customize Netrw
@@ -271,6 +272,12 @@ vim.api.nvim_create_autocmd("filetype", {
 
 		-- edit new file
 		bind("c", "%")
+
+		-- create new folder and focus to it
+		bind(
+			"d",
+			":lua vim.fn.inputsave(); local dir = vim.fn.input('New directory: '); vim.fn.inputrestore(); if dir ~= '' then vim.fn.mkdir(dir, 'p'); vim.cmd('e') vim.cmd('/' .. dir) vim.cmd('normal! l') vim.cmd('noh') end<CR>"
+		)
 
 		-- rename file
 		bind("r", "R")
