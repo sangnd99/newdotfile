@@ -142,7 +142,6 @@ function _G.ToggleNetrw()
 
 	-- Open Netrw if not open
 	vim.cmd("Explore")
-	vim.cmd("normal! gg")
 end
 
 -- Customize Netrw
