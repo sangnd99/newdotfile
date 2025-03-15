@@ -274,6 +274,26 @@ vim.api.nvim_create_autocmd("filetype", {
 
 		-- rename file
 		bind("r", "R")
+
+		-- create directory and enter it
+		bind("d", function()
+			-- Get current directory path
+			local current_dir = vim.fn.expand("%:p:h")
+			-- Prompt for directory name
+			local dir_name = vim.fn.input("Directory name: ")
+			if dir_name == "" then
+				return
+			end
+			-- Create the directory
+			local full_path = current_dir .. "/" .. dir_name
+			vim.fn.mkdir(full_path, "p")
+			-- Refresh netrw
+			vim.cmd("call netrw#Call('NetrwRefresh', 1, '" .. full_path .. "')")
+			-- Enter the new directory
+			vim.cmd("edit " .. vim.fn.fnameescape(full_path))
+			-- Debug output
+			vim.notify("Entered: " .. full_path, vim.log.levels.INFO)
+		end)
 	end,
 })
 
