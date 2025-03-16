@@ -297,6 +297,16 @@ vim.api.nvim_create_autocmd("filetype", {
 	end,
 })
 
+-- Terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+	callback = function(args)
+		vim.api.nvim_buf_call(args.buf, function()
+			vim.cmd("setlocal nonumber norelativenumber")
+		end)
+	end,
+})
+
 -- Keymappings
 vim.keymap.set("n", "<leader>e", "<cmd>lua ToggleNetrw()<cr>", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
@@ -312,6 +322,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up but keep cursor cent
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down but keep cursor center" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next match but keep cursor center" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to prev match but keep cursor center" })
+vim.keymap.set("n", "<leader>t", "<cmd>term<cr>", { desc = "Open a new terminal" })
+vim.keymap.set("t", "<esc><esc>", "<C-\\><C-N>", { desc = "Go to vim mode in terminal" })
 
 -- Plugins
 -- [[ Using `lazy.nvim` for plugins manager ]]
