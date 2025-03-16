@@ -83,19 +83,21 @@ end
 function _G.StatusLine()
 	-- Variables
 	local RESET = "%#Normal#"
+	local SEPARATE_LEFT = " \\ "
+	local SEPARATE_RIGHT = " / "
 	-- Mapping mode
 	local mode_map = {
-		n = "%#PmenuSel# NORMAL ",
-		i = "%#PmenuSel# INSERT ",
-		v = "%#PmenuSel# VISUAL ",
-		V = "%#PmenuSel# V-LINE ",
-		[""] = "%#PmenuSel# V-BLOCK ",
-		c = "%#PmenuSel# COMMAND ",
-		s = "%#PmenuSel# SELECT ",
-		S = "%#PmenuSel# S-LINE ",
-		[""] = "%#PmenuSel# S-BLOCK ",
-		R = "%#PmenuSel# REPLACE ",
-		t = "%#PmenuSel# TERMINAL ",
+		n = "NORMAL ",
+		i = "INSERT ",
+		v = "VISUAL ",
+		V = "V-LINE ",
+		[""] = "V-BLOCK ",
+		c = "COMMAND ",
+		s = "SELECT ",
+		S = "S-LINE ",
+		[""] = "S-BLOCK ",
+		R = "REPLACE ",
+		t = "TERMINAL ",
 	}
 	-- Get diagnostics
 	local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -112,17 +114,19 @@ function _G.StatusLine()
 	end
 
 	return table.concat({
-		mode_map[vim.fn.mode()],
+		"%#PmenuSel# ",
 		RESET,
 		" ",
+		mode_map[vim.fn.mode()],
+		RESET,
+		SEPARATE_LEFT,
 		" %f",
 		"%=",
 		"%c:%l", -- line column
-		" ",
+		SEPARATE_RIGHT,
 		diagnostics,
-		" ",
 		RESET,
-		" ",
+		SEPARATE_RIGHT,
 		"%#StatusLineIcon#",
 		icon,
 		" ",
