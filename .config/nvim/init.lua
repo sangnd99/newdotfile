@@ -312,6 +312,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 -- Keymappings
+local job_id = 0
 vim.keymap.set("n", "<leader>e", "<cmd>lua ToggleNetrw()<cr>", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
 vim.keymap.set("i", "jk", "<esc>", { desc = "Set to normal mode" })
@@ -326,8 +327,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up but keep cursor cent
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down but keep cursor center" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next match but keep cursor center" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to prev match but keep cursor center" })
-vim.keymap.set("n", "<leader>t", "<cmd>term<cr>", { desc = "Open a new terminal" })
 vim.keymap.set("t", "<esc><esc>", "<C-\\><C-N>", { desc = "Go to vim mode in terminal" })
+vim.keymap.set("n", "<leader>t", "<cmd>term<cr>", { desc = "Open a new terminal" })
 
 -- Plugins
 -- [[ Using `lazy.nvim` for plugins manager ]]
