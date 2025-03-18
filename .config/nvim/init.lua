@@ -35,6 +35,7 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.showtabline = 2
+vim.opt.laststatus = 3
 vim.api.nvim_exec(
 	[[
     augroup highlight_yank
