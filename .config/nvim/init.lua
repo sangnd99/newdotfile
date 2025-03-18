@@ -135,14 +135,32 @@ function _G.StatusLine()
 end
 
 -- Explorer
+local netrw_state = {}
 function _G.ToggleNetrw()
 	for _, win in ipairs(vim.api.nvim_list_wins()) do
 		local buf = vim.api.nvim_win_get_buf(win)
 		if vim.bo[buf].filetype == "netrw" then
-			vim.cmd("bd")
+			-- Close the netrw buffer
+			vim.api.nvim_buf_call(buf, function()
+				vim.cmd("bwipeout!")
+			end)
+			-- Restore focus to the original window and buffer
+			if netrw_state.origin_win and vim.api.nvim_win_is_valid(netrw_state.origin_win) then
+				vim.api.nvim_set_current_win(netrw_state.origin_win)
+			end
+			if netrw_state.origin_buf and vim.api.nvim_buf_is_valid(netrw_state.origin_buf) then
+				vim.api.nvim_set_current_buf(netrw_state.origin_buf)
+			end
+			-- Clear the state
+			netrw_state.origin_buf = nil
+			netrw_state.origin_win = nil
 			return
 		end
 	end
+
+	-- If netrw isn’t open, store the current state and open it
+	netrw_state.origin_buf = vim.api.nvim_get_current_buf()
+	netrw_state.origin_win = vim.api.nvim_get_current_win()
 
 	-- Open Netrw if not open
 	vim.cmd("Explore")
