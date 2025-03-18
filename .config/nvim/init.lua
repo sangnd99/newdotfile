@@ -312,7 +312,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 -- Keymappings
-local job_id = 0
 vim.keymap.set("n", "<leader>e", "<cmd>lua ToggleNetrw()<cr>", { desc = "Explorer" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
 vim.keymap.set("i", "jk", "<esc>", { desc = "Set to normal mode" })
