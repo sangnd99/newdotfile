@@ -4,6 +4,13 @@ return {
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			{
+				"aaronhallaert/advanced-git-search.nvim",
+				dependencies = {
+					"tpope/vim-fugitive",
+					"tpope/vim-rhubarb",
+				},
+			},
 		},
 		config = function()
 			local status_ok, telescope = pcall(require, "telescope")
@@ -12,6 +19,7 @@ return {
 			end
 			local builtin = require("telescope.builtin")
 			local actions = require("telescope.actions")
+			local themes = require("telescope.themes")
 
 			telescope.setup({
 				defaults = {
@@ -45,22 +53,39 @@ return {
 					-- Now the picker_config_key will be applied every time you call this
 					-- builtin picker
 				},
-				extensions = {},
+				extensions = {
+					advanced_git_search = {
+						telescope_theme = {
+							diff_commit_file = themes.get_ivy({ layout_config = { height = 100 } }),
+						},
+					},
+				},
 			})
-
+			-- load extensions
 			telescope.load_extension("rest")
+			telescope.load_extension("advanced_git_search")
+
+			local function ivy_opts(opts)
+				return themes.get_ivy(vim.tbl_deep_extend("force", {
+					layout_config = {
+						height = 100,
+					},
+				}, opts or {}))
+			end
 
 			vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Global find file" })
 			vim.keymap.set("n", "<leader>pb", builtin.buffers, { desc = "Opened buffer" })
 			vim.keymap.set("n", "<leader>ps", function()
-				local opts = require("telescope.themes").get_ivy({
-					layout_config = {
-						height = 100
-					},
+				builtin.grep_string(ivy_opts({
 					search = vim.fn.input("Grep > "),
-				})
-				builtin.grep_string(opts)
+				}))
 			end, { desc = "Grep search" })
+			vim.keymap.set(
+				"n",
+				"<leader>gdf",
+				"<cmd>Telescope advanced_git_search diff_commit_file<cr>",
+				{ desc = "Open git commit diff file" }
+			)
 		end,
 	},
 }

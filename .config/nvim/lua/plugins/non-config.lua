@@ -6,7 +6,6 @@ return {
 			vim.g.webdevicons_enable_netrw = 1
 		end,
 	}, -- Icons
-	{ "sindrets/diffview.nvim", opts = {} },
 	{ "windwp/nvim-ts-autotag", opts = {} },
 	{
 		"barrett-ruth/import-cost.nvim",
