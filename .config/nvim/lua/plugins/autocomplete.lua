@@ -23,11 +23,21 @@ return {
 				fuzzy = { implementation = "prefer_rust_with_warning" },
 				signature = { enabled = true, window = { border = "rounded" } },
 				completion = {
+					accept = {
+						-- experimental auto-brackets support
+						auto_brackets = {
+							enabled = true,
+						},
+					},
 					menu = {
+						min_width = 10, -- max_width controlled by draw-function
+						max_height = 10,
 						border = "rounded",
 						winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
 					},
 					documentation = {
+						auto_show = true,
+						auto_show_delay_ms = 250,
 						window = {
 							border = "rounded",
 						},
