@@ -21,6 +21,7 @@ return {
 					notification = {
 						window = {
 							winblend = 0,
+							x_padding = 0,
 						},
 					},
 				},
@@ -108,6 +109,12 @@ return {
 				})
 			end
 
+			-- Set border for textDocument/hover
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = "rounded",
+			})
+
+			-- Language server
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
