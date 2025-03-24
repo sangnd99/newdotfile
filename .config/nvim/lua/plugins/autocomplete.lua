@@ -28,9 +28,8 @@ return {
 				signature = { enabled = true, window = { border = "rounded" } },
 				completion = {
 					accept = {
-						-- experimental auto-brackets support
 						auto_brackets = {
-							enabled = true,
+							enabled = false,
 						},
 					},
 					menu = {
