@@ -11,8 +11,6 @@ return {
 			require("blink.cmp").setup({
 				keymap = {
 					preset = "enter",
-					["<Tab>"] = { "select_next", "fallback_to_mappings" },
-					["<S-Tab>"] = { "select_prev", "fallback_to_mappings" },
 				},
 				sources = {
 					default = { "lsp", "path", "snippets", "buffer" },

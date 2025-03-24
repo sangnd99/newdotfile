@@ -13,6 +13,10 @@ return {
 				highlight = { "Function", "Label" },
 				priority = 500,
 			},
+			exclude = {
+				buftypes = { "nofile", "prompt", "popup" },
+				filetypes = { "TelescopePrompt", "cmp_menu", "cmp_docs", "blink-cmp" },
+			},
 		},
 	},
 }
