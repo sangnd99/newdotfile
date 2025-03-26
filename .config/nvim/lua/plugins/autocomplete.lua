@@ -11,6 +11,7 @@ return {
 			require("blink.cmp").setup({
 				keymap = {
 					preset = "enter",
+					["<C-o>"] = { "show", "show_documentation", "hide_documentation" },
 				},
 				sources = {
 					default = { "lsp", "path", "snippets", "buffer" },
