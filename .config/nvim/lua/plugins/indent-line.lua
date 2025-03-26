@@ -14,9 +14,9 @@ return {
 				priority = 500,
 			},
 			exclude = {
-				buftypes = { "nofile", "prompt", "popup" },
-				filetypes = { "TelescopePrompt", "cmp_menu", "cmp_docs", "blink-cmp" },
-			},
+				buftypes = { "nofile", "prompt", "popup", "terminal" },
+				filetypes = { "TelescopePrompt", "cmp_menu", "cmp_docs", "blink-cmp", "" },
+			}
 		},
 	},
 }
