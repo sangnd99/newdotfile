@@ -347,7 +347,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down but keep cursor ce
 vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next match but keep cursor center" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to prev match but keep cursor center" })
 vim.keymap.set("t", "<esc><esc>", "<C-\\><C-N>", { desc = "Go to vim mode in terminal" })
-vim.keymap.set("n", "<leader>t", "<cmd>term<cr>", { desc = "Open a new terminal" })
+vim.keymap.set("n", "<leader>t", "<cmd>term<cr>i", { desc = "Open a new terminal" })
 vim.keymap.set("n", "<leader>l", "<cmd>term lazygit<cr>", { desc = "Open a lazygit inside terminal" })
 
 -- Plugins
