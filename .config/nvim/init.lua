@@ -12,8 +12,8 @@ vim.g.netrw_banner = 0
 
 -- Settings
 vim.opt.termguicolors = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
 vim.opt.cmdheight = 2
 vim.opt.relativenumber = true
