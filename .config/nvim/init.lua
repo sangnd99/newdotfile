@@ -31,12 +31,15 @@ vim.opt.timeoutlen = 300
 vim.opt.scrolloff = 10
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.breakindent = true
 vim.opt.showtabline = 2
 vim.opt.laststatus = 3
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "80"
 vim.api.nvim_exec(
 	[[
     augroup highlight_yank
