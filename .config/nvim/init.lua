@@ -38,7 +38,6 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.breakindent = true
-vim.opt.showtabline = 2
 vim.opt.laststatus = 3
 vim.opt.colorcolumn = "80"
 vim.api.nvim_exec(

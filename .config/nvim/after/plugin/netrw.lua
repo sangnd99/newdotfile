@@ -114,4 +114,3 @@ vim.api.nvim_create_autocmd("BufModifiedSet", {
 	end,
 	group = vim.api.nvim_create_augroup("netrw", { clear = false }),
 })
-
