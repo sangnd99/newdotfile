@@ -32,8 +32,6 @@ return {
 						},
 					},
 					menu = {
-						min_width = 10, -- max_width controlled by draw-function
-						max_height = 10,
 						border = "rounded",
 						winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
 					},
