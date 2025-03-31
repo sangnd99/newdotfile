@@ -36,7 +36,7 @@ return {
 							["<C-c>"] = actions.close,
 						},
 						n = {
-							["<space>e"] = actions.close,
+							["<C-c"] = actions.close,
 						},
 					},
 				},
