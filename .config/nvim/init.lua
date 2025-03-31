@@ -40,15 +40,18 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.breakindent = true
 vim.opt.laststatus = 3
 vim.opt.colorcolumn = "80"
-vim.api.nvim_exec(
-	[[
-    augroup highlight_yank
-        autocmd!
-        au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
-    augroup END
-  ]],
-	false
-)
+vim.opt.list = true
+vim.opt.listchars = { tab = "│ ", trail = "·", nbsp = "␣" }
+vim.opt.confirm = true
+
+-- Highlight on yanking
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
 
 -- Keymappings
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Explorer" })
