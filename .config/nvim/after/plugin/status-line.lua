@@ -28,6 +28,7 @@ function StatusLine()
 	local file_name = vim.fn.expand("%:t") ~= "" and vim.fn.expand("%:t") or "[No Name]"
 	local file_type = vim.bo.filetype
 	local file_encoding = vim.bo.fileencoding ~= "" and vim.bo.fileencoding or vim.o.encoding
+	local modified = vim.bo.modified and "[+]" or ""
 	local devicons = require("nvim-web-devicons")
 	local icon, icon_color = devicons.get_icon_color(file_name, vim.fn.expand("%:e"), { default = true })
 	if icon_color then
@@ -42,6 +43,8 @@ function StatusLine()
 		RESET,
 		SEPARATE_LEFT,
 		" %f",
+		" ",
+		modified,
 		"%=",
 		"%c:%l", -- line column
 		SEPARATE_RIGHT,
