@@ -36,7 +36,7 @@ return {
 							["<C-c>"] = actions.close,
 						},
 						n = {
-							["<C-c"] = actions.close,
+							["<C-c>"] = actions.close,
 						},
 					},
 				},
@@ -62,7 +62,6 @@ return {
 				},
 			})
 			-- load extensions
-			telescope.load_extension("rest")
 			telescope.load_extension("advanced_git_search")
 
 			local function ivy_opts(opts)
