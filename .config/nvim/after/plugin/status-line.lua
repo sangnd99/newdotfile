@@ -7,17 +7,17 @@ function StatusLine()
 	local SEPARATE_RIGHT = " / "
 	-- Mapping mode
 	local mode_map = {
-		n = "NORMAL ",
-		i = "INSERT ",
-		v = "VISUAL ",
-		V = "V-LINE ",
-		[""] = "V-BLOCK ",
-		c = "COMMAND ",
-		s = "SELECT ",
-		S = "S-LINE ",
-		[""] = "S-BLOCK ",
-		R = "REPLACE ",
-		t = "TERMINAL ",
+		n = "NORMAL",
+		i = "INSERT",
+		v = "VISUAL",
+		V = "V-LINE",
+		[""] = "V-BLOCK",
+		c = "COMMAND",
+		s = "SELECT",
+		S = "S-LINE",
+		[""] = "S-BLOCK",
+		R = "REPLACE",
+		t = "TERMINAL",
 	}
 	-- Get diagnostics
 	local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -42,7 +42,7 @@ function StatusLine()
 		mode_map[vim.fn.mode()],
 		RESET,
 		SEPARATE_LEFT,
-		" %f",
+		" %t",
 		" ",
 		modified,
 		"%=",
