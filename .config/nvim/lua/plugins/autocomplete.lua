@@ -21,6 +21,8 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"lukas-reineke/cmp-under-comparator",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -133,6 +135,7 @@ return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
+					{ name = "nvim_lsp_signature_help" },
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -148,6 +151,18 @@ return {
 				confirm_opts = {
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = false,
+				},
+				sorting = {
+					comparators = {
+						cmp.config.compare.offset,
+						cmp.config.compare.exact,
+						cmp.config.compare.score,
+						require("cmp-under-comparator").under,
+						cmp.config.compare.kind,
+						cmp.config.compare.sort_text,
+						cmp.config.compare.length,
+						cmp.config.compare.order,
+					},
 				},
 			})
 
