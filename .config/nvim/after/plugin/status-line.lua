@@ -35,9 +35,6 @@ function StatusLine()
 		vim.api.nvim_set_hl(0, "StatusLineIcon", { fg = icon_color, bg = "NONE" })
 	end
 
-	-- No background
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", fg = "#FFFFFF" })
-
 	return table.concat({
 		"%#PmenuSel# ",
 		RESET,

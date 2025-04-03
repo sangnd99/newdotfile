@@ -36,6 +36,7 @@ return { -- Vscode color scheme
 					CursorColumn = { fg = "NONE", bg = c.vscCursorDark },
 					ColorColumn = { fg = "NONE", bg = c.vscCursorDark },
 					GitSignsCurrentLineBlame = { fg = c.vscCursorLight },
+					StatusLine = { bg = "NONE" },
 				},
 			})
 			vim.api.nvim_exec(
