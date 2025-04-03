@@ -56,8 +56,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Keymappings
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Explorer" })
 vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>", { desc = "Set no hilighting" })
-vim.keymap.set("i", "jk", "<esc>", { desc = "Set to normal mode" })
-vim.keymap.set("i", "kj", "<esc>", { desc = "Set to normal mode" })
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { desc = "Moving block to top" })
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { desc = "Moving block to bottom" })
 vim.keymap.set("v", "<", "<gv", { desc = "Untab block" })
