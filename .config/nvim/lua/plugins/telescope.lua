@@ -36,7 +36,7 @@ return {
 							["<C-c>"] = actions.close,
 						},
 						n = {
-							["<C-c>"] = actions.close,
+							["q"] = actions.close,
 						},
 					},
 				},
