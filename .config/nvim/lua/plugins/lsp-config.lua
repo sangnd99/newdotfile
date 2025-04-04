@@ -26,7 +26,7 @@ return {
 					},
 				},
 			},
-			"hrsh7th/cmp-nvim-lsp",
+			"saghen/blink.cmp",
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -112,11 +112,12 @@ return {
 			-- Set border for textDocument/hover
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 				border = "rounded",
+				borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 			})
 
 			-- Language server
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			capabilities = vim.tbl_deep_extend("force", capabilities, require('blink.cmp').get_lsp_capabilities())
 
 			local servers = {
 				lua_ls = {
@@ -162,7 +163,7 @@ return {
 						},
 					},
 				},
-				gopls = {}
+				gopls = {},
 			}
 
 			local ensure_installed = vim.tbl_keys(servers or {})
