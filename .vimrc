@@ -90,6 +90,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
+" Detect tabstop and shiftwidth automatically
+Plug 'tpope/vim-sleuth'
+
 " Colorscheme
 Plug 'ghifarit53/tokyonight-vim'
 
