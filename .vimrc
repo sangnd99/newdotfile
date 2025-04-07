@@ -137,6 +137,7 @@ inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 let g:lsp_use_native_client = 1
 let g:lsp_semantic_enabled = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
 
 function! s:on_lsp_buffer_enabled() abort
 	setlocal omnifunc=lsp#complete
@@ -150,7 +151,7 @@ function! s:on_lsp_buffer_enabled() abort
 	nmap <buffer> gr 				 <plug>(lsp-references)
 	nmap <buffer> gI				 <plug>(lsp-implementation)
 	nmap <buffer> K					 <plug>(lsp-hover)
-	nmap <buffer> J					 :LspHover<cr>
+	nmap <buffer> J					 :LspDocumentDiagnostics<cr>
 	nmap <buffer> <C-k>			 <plug>(lsp-signature-help)
   nmap <buffer> <leader>f  :Format<cr>  
   nnoremap <buffer> <expr> <C-b> lsp#scroll(-4)
