@@ -111,6 +111,9 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
+" Comment
+Plug 'tpope/vim-commentary'
+
 call plug#end()
 
 " [[ Configure plugins ]]
