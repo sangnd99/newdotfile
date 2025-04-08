@@ -51,12 +51,46 @@ vim.opt.confirm = true
 local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
 local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
 local diagnostics = string.format("%%#DiagnosticError#E:%d %%#DiagnosticWarn#W:%d%%#StatusLine#", errors, warnings)
+function _G.short_filepath()
+	local path = vim.fn.expand("%:~:.")
+	local parts = vim.split(path, "/")
+	if #parts <= 3 then
+		return path
+	end
+
+	local last_parts = { unpack(parts, #parts - 2, #parts) }
+	return "~../" .. table.concat(last_parts, "/")
+end
+function _G.mode()
+	local mode_map = {
+		n = "NORMAL ",
+		i = "INSERT ",
+		v = "VISUAL ",
+		V = "V-LINE ",
+		[""] = "V-BLOCK ",
+		c = "COMMAND ",
+		s = "SELECT ",
+		S = "S-LINE ",
+		[""] = "S-BLOCK ",
+		R = "REPLACE ",
+		t = "TERMINAL ",
+	}
+	local mode = vim.fn.mode()
+	return mode_map[mode] or mode
+end
 vim.o.statusline = table.concat({
+	"%#PmenuSel#",
 	" ",
-	" %t",
+	"%{%v:lua.mode()%}",
+	"%#StatusLine#",
+	" ",
+	diagnostics,
+	"%=",
+  "%#SpecialKey#",
+	"%{%v:lua.short_filepath()%}",
+  "%#StatusLine#",
 	"%m",
 	"%=",
-	diagnostics,
 	" ",
 	"[col:%c,ln:%l]",
 	" ",
