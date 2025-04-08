@@ -81,7 +81,7 @@ return {
 			end, { desc = "Grep search" })
 			vim.keymap.set(
 				"n",
-				"<leader>gdf",
+				"<leader>pdf",
 				"<cmd>Telescope advanced_git_search diff_commit_file<cr>",
 				{ desc = "Open git commit diff file" }
 			)
