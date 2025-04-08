@@ -1,15 +1,15 @@
 return {
 	{
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "1.*",
 		opts = {
 			keymap = {
 				preset = "enter",
 				["<C-o>"] = { "show", "show_documentation", "hide_documentation" },
-				["<C-l>"] = { "snippet_forward", "fallback" },
-				["<C-h"] = { "snippet_backward", "fallback" },
+				["<C-l"] = { "snippet_forward", "fallback" },
+				["<C-h>"] = { "snippet_backward", "fallback" },
 			},
+			snippets = { preset = "luasnip" },
 			appearance = {
 				nerd_font_variant = "mono",
 			},
