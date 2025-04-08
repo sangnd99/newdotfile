@@ -52,29 +52,29 @@ local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR
 local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
 local diagnostics = string.format("%%#DiagnosticError#E:%d %%#DiagnosticWarn#W:%d%%#StatusLine#", errors, warnings)
 vim.o.statusline = table.concat({
-  " ",
-  " %t",
-  "%m",
-  "%=",
-  diagnostics,
-  " ",
-  "[col:%c,ln:%l]",
-  " ",
-  "%{&fileencoding?&fileencoding:&encoding}",
-  " ",
-  "[%{&filetype}]",
-  " "
+	" ",
+	" %t",
+	"%m",
+	"%=",
+	diagnostics,
+	" ",
+	"[col:%c,ln:%l]",
+	" ",
+	"%{&fileencoding?&fileencoding:&encoding}",
+	" ",
+	"[%{&filetype}]",
+	" ",
 })
 -- Terminal
 vim.api.nvim_create_autocmd("TermOpen", {
-  group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
-  pattern = "*",
-  callback = function(args)
-    vim.api.nvim_buf_call(args.buf, function()
-      vim.cmd("startinsert")
-      vim.cmd("setlocal nonumber norelativenumber")
-    end)
-  end,
+	group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+	pattern = "*",
+	callback = function(args)
+		vim.api.nvim_buf_call(args.buf, function()
+			vim.cmd("startinsert")
+			vim.cmd("setlocal nonumber norelativenumber")
+		end)
+	end,
 })
 
 -- [[ Keymappings ]]
@@ -98,27 +98,27 @@ vim.keymap.set("n", "<leader>l", "<cmd>term lazygit<cr>", { desc = "Open a lazyg
 -- [[ Helpers ]]
 -- Highlight on yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 -- [[ Plugins ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
