@@ -48,9 +48,6 @@ vim.opt.confirm = true
 
 -- [[ Builtins config ]]
 -- Status line
-local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-local diagnostics = string.format("%%#DiagnosticError#E:%d %%#DiagnosticWarn#W:%d%%#StatusLine#", errors, warnings)
 function _G.short_filepath()
 	local path = vim.fn.expand("%:~:.")
 	local parts = vim.split(path, "/")
@@ -86,13 +83,11 @@ vim.o.statusline = table.concat({
 	" ",
 	"%{%v:lua.short_filepath()%}",
 	"%m",
-	" ",
-	diagnostics,
 	"%=",
 	" ",
-	"[col:%c,ln:%l]",
+	"[%p%%]",
 	" ",
-	"%{&fileencoding?&fileencoding:&encoding}",
+	"[%{&fileencoding?&fileencoding:&encoding}]",
 	" ",
 	"[%{&filetype}]",
 	" ",
