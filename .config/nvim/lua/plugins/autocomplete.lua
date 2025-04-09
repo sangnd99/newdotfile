@@ -4,10 +4,21 @@ return {
 		version = "1.*",
 		opts = {
 			keymap = {
-				preset = "enter",
+				preset = "none",
 				["<C-o>"] = { "show", "show_documentation", "hide_documentation" },
-				["<C-l"] = { "snippet_forward", "fallback" },
-				["<C-h>"] = { "snippet_backward", "fallback" },
+				["<C-e>"] = { "hide", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
+
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+				["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+				["<C-n>"] = { "select_next", "fallback_to_mappings" },
+
+				["<C-u>"] = { "scroll_documentation_up", "fallback" },
+				["<C-d>"] = { "scroll_documentation_down", "fallback" },
+
+				["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 			},
 			snippets = { preset = "luasnip" },
 			appearance = {
