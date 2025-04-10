@@ -36,14 +36,14 @@ return {
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = attach_event.buf, desc = "LSP: " .. desc })
           end
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]o to [D]efinition")
+          map("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
           map("gD", vim.lsp.buf.declaration, "[G]o to [D]eclaration")
           map("]d", vim.diagnostic.goto_next, "Goto next [D]iagnostics")
           map("[d", vim.diagnostic.goto_prev, "Goto prev [D]iagnostics")
           map("K", vim.lsp.buf.hover, "Hover documentations")
           map("J", vim.diagnostic.open_float, "Open diagnostic in float window")
           map("<leader>rn", vim.lsp.buf.rename, "[R]ename")
-          map("<leader>ld", require("telescope.builtin").diagnostics, "[L]ist [D]iagnostics")
+          map("<leader>ld", vim.diagnostic.setqflist, "[L]ist [D]iagnostics")
           map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
           -- Avoiding LSP formatting conflicts
