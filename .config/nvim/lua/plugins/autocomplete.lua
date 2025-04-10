@@ -26,7 +26,12 @@ return {
 			},
 			completion = {
 				accept = { auto_brackets = { enabled = false } },
-				menu = { border = "rounded" },
+				menu = {
+					border = "rounded",
+					draw = {
+						columns = { { "label", "label_description", gap = 1 }, { "kind" } },
+					},
+				},
 				documentation = { auto_show = true, auto_show_delay_ms = 250, window = { border = "rounded" } },
 			},
 			fuzzy = { implementation = "prefer_rust_with_warning" },
