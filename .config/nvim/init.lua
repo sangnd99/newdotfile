@@ -121,6 +121,12 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to prev match but keep cursor c
 vim.keymap.set("t", "<esc><esc>", "<C-\\><C-N>", { desc = "Go to vim mode in terminal", silent = true })
 vim.keymap.set("n", "<leader>t", "<cmd>term<cr>", { desc = "Open a new terminal", silent = true })
 vim.keymap.set("n", "<leader>lg", "<cmd>term lazygit<cr>", { desc = "Open a lazygit inside terminal", silent = true })
+vim.keymap.set("n", "<C-,>", "<C-w><", { desc = "Resize window horizontal", silent = true })
+vim.keymap.set("n", "<C-.>", "<C-w>>", { desc = "Resize window horizontal", silent = true })
+vim.keymap.set("n", "<C-=>", "<C-w>+", { desc = "Resize window vertical", silent = true })
+vim.keymap.set("n", "<C-->", "<C-w>-", { desc = "Resize window vertical", silent = true })
+vim.keymap.set("n", "ss", "<C-w>s<C-w>p", { desc = "Split window", silent = true })
+vim.keymap.set("n", "sv", "<C-w>v<C-w>p", { desc = "Vertical split window", silent = true })
 
 -- [[ Helpers ]]
 -- Highlight on yanking
