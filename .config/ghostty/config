@@ -7,7 +7,7 @@ font-size = 16.0
 
 theme = vscode.conf
 cursor-style = block
-background-opacity = 0.90
+background-opacity = 0.85
 
 shell-integration = zsh
 shell-integration-features = no-cursor,sudo,no-title
