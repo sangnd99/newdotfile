@@ -75,11 +75,20 @@ function _G.mode()
 	local mode = vim.fn.mode()
 	return mode_map[mode] or mode
 end
+function _G.recording_status()
+	local reg = vim.fn.reg_recording()
+	if reg == "" then
+		return ""
+	else
+		return "[Recording @" .. reg .. "]"
+	end
+end
 vim.o.statusline = table.concat({
 	"%#PmenuSel#",
 	" ",
 	"%{%v:lua.mode()%}",
 	"%#StatusLine#",
+	"%{%v:lua.recording_status()%}",
 	" ",
 	"%{%v:lua.short_filepath()%}",
 	"%m",
