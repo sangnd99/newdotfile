@@ -96,11 +96,7 @@ return {
           },
         },
         jsonls = {},
-        intelephense = {},
         bashls = {},
-        eslint = {},
-        prettier = {},
-        prettierd = {},
         tailwindcss = {
           settings = {
             tailwindCSS = {
