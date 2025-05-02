@@ -94,11 +94,9 @@ vim.o.statusline = table.concat({
 	"%m",
 	"%=",
 	" ",
+	"%{&filetype}",
+	" ",
 	"[%p%%]",
-	" ",
-	"[%{&fileencoding?&fileencoding:&encoding}]",
-	" ",
-	"[%{&filetype}]",
 	" ",
 })
 -- Terminal
