@@ -1,3 +1,4 @@
+export BASH_SILENCE_DEPRECATION_WARNING=1
 # promp UI
 PROMPT_COMMAND='
   PS1_CMD1=$(git branch --show-current 2>/dev/null)
