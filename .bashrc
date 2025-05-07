@@ -7,7 +7,21 @@ PROMPT_COMMAND='
   else
     PS1_BRANCH=""
   fi
-  PS1="\[\e[34m\]\w\[\e[0m\]${PS1_BRANCH}\n\[\e[35m\]\$\[\e[0m\] "
+
+  # If at home, show ~
+  if [ "$PWD" = "$HOME" ]; then
+    SHORT_DIR="~"
+  else
+    IFS="/" read -ra DIR_PARTS <<< "${PWD#$HOME/}"  # Remove home prefix
+    DIR_COUNT=${#DIR_PARTS[@]}
+    if (( DIR_COUNT > 3 )); then
+      SHORT_DIR=".../${DIR_PARTS[DIR_COUNT-3]}/${DIR_PARTS[DIR_COUNT-2]}/${DIR_PARTS[DIR_COUNT-1]}"
+    else
+      SHORT_DIR="${PWD/#$HOME/~}"  # Replace full home path with ~
+    fi
+  fi
+
+  PS1="\[\e[34m\]$SHORT_DIR\[\e[0m\]${PS1_BRANCH}\n\[\e[35m\]\$\[\e[0m\] "
 '
 
 # brew
