@@ -7,7 +7,7 @@ PROMPT_COMMAND='
   else
     PS1_BRANCH=""
   fi
-  PS1="\[\e[34m\]\w\[\e[0m\]${PS1_BRANCH}\n\[\e[32m\]\$\[\e[0m\] "
+  PS1="\[\e[34m\]\w\[\e[0m\]${PS1_BRANCH}\n\[\e[35m\]\$\[\e[0m\] "
 '
 
 # brew
