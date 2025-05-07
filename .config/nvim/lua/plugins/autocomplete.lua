@@ -30,6 +30,7 @@ return {
 					border = "rounded",
 					draw = {
 						columns = { { "label", "label_description", gap = 1 }, { "kind" } },
+						treesitter = { "lsp" },
 					},
 				},
 				documentation = { auto_show = true, auto_show_delay_ms = 250, window = { border = "rounded" } },
