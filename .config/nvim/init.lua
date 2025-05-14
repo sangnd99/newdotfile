@@ -99,7 +99,7 @@ vim.o.statusline = table.concat({
 	"[%p%%]",
 	" ",
 })
--- Terminal
+-- [[ Terminal ]]
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
 	pattern = "*",
@@ -108,6 +108,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
 			vim.cmd("startinsert")
 			vim.cmd("setlocal nonumber norelativenumber")
 		end)
+	end,
+})
+
+-- [[ Netrw ]]
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "netrw",
+	callback = function()
+		vim.wo.signcolumn = "no"
 	end,
 })
 

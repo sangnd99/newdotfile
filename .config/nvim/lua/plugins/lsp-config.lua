@@ -1,19 +1,10 @@
--- add to your shared on_attach callback
-local on_attach = function(client, bufnr)
-	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ buffer = bufnr })
-	end
-end
-
 return {
-	{ -- Lsp configuration
+	{
+		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ -- LSP manager
-				"williamboman/mason.nvim",
-				opts = {},
-			},
-			"williamboman/mason-lspconfig.nvim",
+			{ "mason-org/mason.nvim", opts = {} },
+			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{
 				"j-hui/fidget.nvim",
@@ -30,57 +21,51 @@ return {
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(attach_event)
-					local client = vim.lsp.get_client_by_id(attach_event.data.client_id)
+				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+				callback = function(event)
 					local map = function(keys, func, desc, mode)
 						mode = mode or "n"
-						vim.keymap.set(mode, keys, func, { buffer = attach_event.buf, desc = "LSP: " .. desc })
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
+
 					map("gd", vim.lsp.buf.definition, "[G]o to [D]efinition")
 					map("gD", vim.lsp.buf.declaration, "[G]o to [D]eclaration")
 					map("]d", vim.diagnostic.goto_next, "Goto next [D]iagnostics")
 					map("[d", vim.diagnostic.goto_prev, "Goto prev [D]iagnostics")
-					map("<C-j>", vim.diagnostic.open_float, "Open diagnostic in float window")
+					map("<leader>d", vim.diagnostic.open_float, "Open diagnostic in float window")
 					map("<leader>rn", vim.lsp.buf.rename, "[R]ename")
-					map("<leader>ld", vim.diagnostic.setqflist, "[L]ist [D]iagnostics")
+					map("<leader>ld", vim.diagnostic.setloclist, "[L]ist [D]iagnostics")
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-					-- Avoiding LSP formatting conflicts
-					if client then
-						on_attach(client, attach_event.buf)
-					end
 				end,
 			})
 
+			-- Diagnostic Config
+			-- See :help vim.diagnostic.Opts
 			vim.diagnostic.config({
-				update_in_insert = false,
-				underline = true,
-				serverity_sort = true,
-				float = {
-					focusable = true,
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
+				severity_sort = true,
+				float = { border = "rounded", source = "if_many" },
+				underline = { severity = vim.diagnostic.severity.ERROR },
+				virtual_text = {
+					source = "if_many",
+					spacing = 2,
+					format = function(diagnostic)
+						local diagnostic_message = {
+							[vim.diagnostic.severity.ERROR] = diagnostic.message,
+							[vim.diagnostic.severity.WARN] = diagnostic.message,
+							[vim.diagnostic.severity.INFO] = diagnostic.message,
+							[vim.diagnostic.severity.HINT] = diagnostic.message,
+						}
+						return diagnostic_message[diagnostic.severity]
+					end,
 				},
 			})
 
-			-- Set border for textDocument/hover
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "rounded",
-				borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-			})
-
-			-- Language server
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			local servers = {
 				cssls = {},
 				html = {},
 				ts_ls = {
-					single_file_support = false,
 					commands = {
 						OrganizeImports = {
 							function()
@@ -121,13 +106,19 @@ return {
 			}
 
 			local ensure_installed = vim.tbl_keys(servers or {})
+			vim.list_extend(ensure_installed, {
+				"stylua",
+			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
 			require("mason-lspconfig").setup({
+				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+				automatic_installation = false,
 				handlers = {
 					function(server_name)
-						local config = servers[server_name] or {}
-						vim.lsp.config(server_name, config)
-						vim.lsp.enable(server_name)
+						local server = servers[server_name] or {}
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+						require("lspconfig")[server_name].setup(server)
 					end,
 				},
 			})
