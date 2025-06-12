@@ -8,6 +8,7 @@ Author: Sang Nguyen(gnas129)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.netrw_banner = 0
+vim.g.netrw_sort_by = 'none'
 
 -- [[ Vim settings ]]
 vim.opt.number = true
@@ -170,4 +171,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+require("lazy").setup({
+	import = "plugins",
+}, {
+	change_detection = {
+		notify = false,
+	},
+})
